@@ -1,0 +1,25 @@
+{
+  "name": "middle.messenger.praktikum.yandex",
+  "version": "1.0.0",
+  "description": "messenger app",
+  "scripts": {
+    "dev": "parcel static/index.html --no-cache",
+    "build": "parcel build static/index.html --public-html ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dksr/middle.messenger.praktikum.yandex.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dksr/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/dksr/middle.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.3",
+    "parcel": "^2.8.3"
+  }
+}
