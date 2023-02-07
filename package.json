@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "messenger app",
   "scripts": {
-    "dev": "parcel static/index.html --no-cache",
-    "build": "parcel build static/index.html --public-html ./",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "rm -rf dist/* && parcel static/index.html --no-cache",
+    "build": "rm -rf dist/* && parcel build static/index.html --public-url ./"
   },
   "repository": {
     "type": "git",

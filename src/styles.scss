@@ -2,10 +2,12 @@
 
 $fontFamily: 'Ubuntu', sans-serif;
 $mainColor: #3369F3;
+$textColor: #1E1E1E;
 $errorColor: #FF2F2F;
 
 * {
   font-family: $fontFamily;
+  color: $textColor;
 }
 
 body {
@@ -120,5 +122,32 @@ body {
       }
     }
 
+  }
+}
+
+.error-content {
+  text-align: center;
+
+  &__title {
+    font-size: 60px;
+  }
+
+  &__description {
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: 500;
+  }
+
+  &__backlink {
+    display: block;
+    font-size: 14px;
+    margin-top: 40px;
+    font-weight: 500;
+    color: $mainColor;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
