@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Profile avatar edit</title>
+  <link rel="stylesheet" href="styles.scss">
+</head>
+<body>
+<div class="container">
+  <div class="profile-content">
+    <div class="profile-content__sidebar">
+      <a href="index.hbs">
+        <img src="../static/profile-back.svg" alt="back">
+      </a>
+    </div>
+    <div class="profile-content__avatar">
+      <a href="profile-avatar-edit.hbs">
+        <img src="../static/no-avatar.png" alt="empty avatar">
+        <span>Поменять аватар</span>
+      </a>
+    </div>
+    <div class="profile-content__title">Иван</div>
+    <div class="profile-content__table">
+      <div class="row">
+        <span class="field-name">Почта</span>
+        <span class="field-value">pochta@yandex.ru</span>
+      </div>
+      <div class="row">
+        <span class="field-name">Логин</span>
+        <span class="field-value">ivanivanov</span>
+      </div>
+      <div class="row">
+        <span class="field-name">Имя</span>
+        <span class="field-value">Иван</span>
+      </div>
+      <div class="row">
+        <span class="field-name">Фамилия</span>
+        <span class="field-value">Иванов</span>
+      </div>
+      <div class="row">
+        <span class="field-name">Имя в чате</span>
+        <span class="field-value">Иван</span>
+      </div>
+      <div class="row">
+        <span class="field-name">Телефон</span>
+        <span class="field-value">+7 (999) 111-11-11</span>
+      </div>
+    </div>
+    <div class="profile-content__buttons">
+      <a class="profile-content__link" href="profile-edit.hbs">Изменить данные</a>
+      <a class="profile-content__link" href="profile-password-edit.hbs">Изменить пароль</a>
+      <a class="profile-content__link profile-content__link_red" href="index.hbs">Выйти</a>
+    </div>
+  </div>
+</div>
+<div class="overlay"></div>
+<div class="modal-container">
+  <div class="modal">
+    <div class="modal__title">Загрузите файл</div>
+    <form class="modal__form">
+      <a class="description" href="profile.hbs">Выбрать файл на компьютере</a>
+    </form>
+    <div class="modal__buttons">
+      <a class="button-confirm" href="profile.hbs">Поменять</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
