@@ -64,7 +64,7 @@ body {
       outline: none;
       padding: 7px 0;
 
-      &:focus + label, &:not(:placeholder-shown) ~ label {
+      &:focus + label, &:not(:placeholder-shown) + label {
         top: - 10px;
         font-size: 12px;
       }
@@ -146,6 +146,21 @@ body {
     color: $mainColor;
     text-decoration: none;
 
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.nav-content {
+  ol {
+    padding-left: 20px;
+  }
+  a {
+    display: block;
+    color: $mainColor;
+    margin-bottom: 10px;
+    text-decoration: none;
     &:hover {
       text-decoration: underline;
     }
