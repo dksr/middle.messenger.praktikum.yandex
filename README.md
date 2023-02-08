@@ -13,3 +13,5 @@ https://www.figma.com/file/waPMcnmLEq8yePIAN7VMxN/messenger-prototype.dkst?node-
 Билд проекта в папку dist
 >npm run build
 > 
+### Netlify
+https://spontaneous-paprenjak-c2e50f.netlify.app
