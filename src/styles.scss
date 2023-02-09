@@ -2,9 +2,16 @@
 
 $fontFamily: 'Ubuntu', sans-serif;
 $mainColor: #3369F3;
+$mainBgColor: #FFFFFF;
+$overlayBgColor: #000000;
+$labelColor: #999999;
 $textColor: #1E1E1E;
 $errorColor: #FF2F2F;
 $logoutColor: #FF0000;
+$buttonTextColor: #FFFFFF;
+$sidebarBgColor: #FBFBFB;
+$overlayTextColor: #FFFFFF;
+$bordersColor: #EAEAEA;
 
 * {
   font-family: $fontFamily;
@@ -17,7 +24,7 @@ body {
 }
 
 .container {
-  background: #fff;
+  background: $mainBgColor;
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -31,7 +38,7 @@ body {
   width: 100%;
   height: 100vh;
   opacity: .4;
-  background: #000;
+  background: $overlayBgColor;
 }
 
 .modal-container {
@@ -72,7 +79,7 @@ body {
       display: block;
       font-size: 14px;
       font-weight: 500;
-      color: #999999;
+      color: $labelColor;
       position: absolute;
       top: 0;
       transition: 0.2s;
@@ -126,7 +133,7 @@ body {
         background: $mainColor;
         border-radius: 8px;
         height: 37px;
-        color: #fff;
+        color: $buttonTextColor;
         font-weight: 500;
 
         &:hover {
@@ -153,6 +160,9 @@ body {
 
   &__title {
     font-size: 60px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
   }
 
   &__description {
@@ -199,8 +209,8 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    background: #FBFBFB;
-    border-right: 1px solid #EAEAEA;
+    background: $sidebarBgColor;
+    border-right: 1px solid $bordersColor;
     cursor: pointer;
     transition: 0.3s;
 
@@ -243,7 +253,7 @@ body {
         height: 150px;
         background: #000000;
         opacity: 0;
-        color: #fff;
+        color: $overlayTextColor;
         font-size: 12px;
         transition: 0.3s;
       }
@@ -268,13 +278,18 @@ body {
     .row {
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px solid #EAEAEA;
+      border-bottom: 1px solid $bordersColor;
       padding: 10px 0;
       font-size: 14px;
       font-weight: 500;
 
       .field-value {
         color: #999999;
+        border: none;
+        outline: none;
+        font-weight: 500;
+        text-align: right;
+        width: 50%;
       }
 
       &:last-child {
@@ -291,7 +306,7 @@ body {
     display: block;
     padding: 10px 0;
     text-decoration: none;
-    border-bottom: 1px solid #EAEAEA;
+    border-bottom: 1px solid $bordersColor;
     color: $mainColor;
     font-size: 14px;
     font-weight: 500;
@@ -312,7 +327,7 @@ body {
     align-items: center;
     width: 280px;
     height: 37px;
-    color: #fff;
+    color: $buttonTextColor;
     background: $mainColor;
     border-radius: 8px;
     font-size: 14px;
@@ -348,8 +363,10 @@ body {
   width: 340px;
   border-radius: 12px;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
-  background: #fff;
-
+  background: $mainBgColor;
+  .avatar_hidden {
+    display: none;
+  }
   &__title {
     font-size: 24px;
     font-weight: 500;
@@ -397,7 +414,7 @@ body {
         background: $mainColor;
         border-radius: 8px;
         height: 37px;
-        color: #fff;
+        color: $buttonTextColor;
         font-weight: 500;
 
         &:hover {

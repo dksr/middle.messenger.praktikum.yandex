@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="styles.scss">
 </head>
 <body>
-<div class="container">
+<main class="container">
   <div class="profile-content">
     <div class="profile-content__sidebar">
       <a href="index.hbs">
@@ -21,37 +21,37 @@
         <span>Поменять аватар</span>
       </a>
     </div>
-    <div class="profile-content__title">Иван</div>
-    <div class="profile-content__table">
+    <h1 class="profile-content__title">Иван</h1>
+    <form class="profile-content__table">
       <div class="row">
         <span class="field-name">Почта</span>
-        <span class="field-value" contenteditable>pochta@yandex.ru</span>
+        <input class="field-value" name="email" type="email" value="pochta@yandex.ru">
       </div>
       <div class="row">
         <span class="field-name">Логин</span>
-        <span class="field-value" contenteditable>ivanivanov</span>
+        <input class="field-value" name="login" type="text" value="ivanivanov">
       </div>
       <div class="row">
         <span class="field-name">Имя</span>
-        <span class="field-value" contenteditable>Иван</span>
+        <input class="field-value" name="first_name" type="text" value="Иван">
       </div>
       <div class="row">
         <span class="field-name">Фамилия</span>
-        <span class="field-value" contenteditable>Иванов</span>
+        <input class="field-value" name="second_name" type="text" value="Иванов">
       </div>
       <div class="row">
         <span class="field-name">Имя в чате</span>
-        <span class="field-value" contenteditable>Иван</span>
+        <input class="field-value" name="display_name" type="text" value="Иван">
       </div>
       <div class="row">
         <span class="field-name">Телефон</span>
-        <span class="field-value" contenteditable>+7 (999) 111-11-11</span>
+        <input class="field-value" name="phone" type="text" value="+7 (999) 111-11-11">
       </div>
-    </div>
+    </form>
     <div class="profile-content__buttons">
       <a class="profile-content__save-button" href="profile.hbs">Сохранить</a>
     </div>
   </div>
-</div>
+</main>
 </body>
 </html>

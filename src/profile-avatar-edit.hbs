@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="styles.scss">
 </head>
 <body>
-<div class="container">
+<main class="container">
   <div class="profile-content">
     <div class="profile-content__sidebar">
       <a href="index.hbs">
@@ -21,7 +21,7 @@
         <span>Поменять аватар</span>
       </a>
     </div>
-    <div class="profile-content__title">Иван</div>
+    <h1 class="profile-content__title">Иван</h1>
     <div class="profile-content__table">
       <div class="row">
         <span class="field-name">Почта</span>
@@ -54,13 +54,14 @@
       <a class="profile-content__link profile-content__link_red" href="index.hbs">Выйти</a>
     </div>
   </div>
-</div>
+</main>
 <div class="overlay"></div>
 <div class="modal-container">
   <div class="modal">
-    <div class="modal__title">Загрузите файл</div>
+    <h3 class="modal__title">Загрузите файл</h3>
     <form class="modal__form">
-      <a class="description" href="profile.hbs">Выбрать файл на компьютере</a>
+      <label for="avatar" class="description">Выбрать файл на компьютере</label>
+      <input class="avatar_hidden" type="file" name="avatar" id="avatar">
     </form>
     <div class="modal__buttons">
       <a class="button-confirm" href="profile.hbs">Поменять</a>
