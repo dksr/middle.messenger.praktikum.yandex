@@ -1,0 +1,437 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+
+$fontFamily: 'Ubuntu', sans-serif;
+$mainColor: #3369F3;
+$mainBgColor: #FFFFFF;
+$overlayBgColor: #000000;
+$labelColor: #999999;
+$textColor: #1E1E1E;
+$errorColor: #FF2F2F;
+$logoutColor: #FF0000;
+$buttonTextColor: #FFFFFF;
+$sidebarBgColor: #FBFBFB;
+$overlayTextColor: #FFFFFF;
+$bordersColor: #EAEAEA;
+
+* {
+  font-family: $fontFamily;
+  color: $textColor;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  background: $mainBgColor;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: .4;
+  background: $overlayBgColor;
+}
+
+.modal-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.auth-content {
+  position: relative;
+  width: 340px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+
+  &__title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 50px;
+    text-align: center;
+  }
+
+  &__form {
+    margin-top: 50px;
+    margin-left: 30px;
+    margin-right: 30px;
+
+    .field {
+      position: relative;
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: $labelColor;
+      position: absolute;
+      top: 0;
+      transition: 0.2s;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid $mainColor;
+      outline: none;
+      padding: 7px 0;
+
+      &:focus + label, &:not(:placeholder-shown) + label {
+        top: - 10px;
+        font-size: 12px;
+      }
+    }
+
+    span {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: -6px;
+      left: 0;
+      color: $errorColor;
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+
+  &__buttons {
+    width: 280px;
+    margin: 30px;
+    margin-top: 50px;
+
+    a {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      background: none;
+      font-size: 14px;
+      transition: 0.2s;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &.button-auth {
+        background: $mainColor;
+        border-radius: 8px;
+        height: 37px;
+        color: $buttonTextColor;
+        font-weight: 500;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      &.button-register {
+        color: $mainColor;
+        font-weight: 500;
+        margin-top: 14px;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+  }
+}
+
+.error-content {
+  text-align: center;
+
+  &__title {
+    font-size: 60px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__description {
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: 500;
+  }
+
+  &__backlink {
+    display: block;
+    font-size: 14px;
+    margin-top: 40px;
+    font-weight: 500;
+    color: $mainColor;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.nav-content {
+  ol {
+    padding-left: 20px;
+  }
+
+  a {
+    display: block;
+    color: $mainColor;
+    margin-bottom: 10px;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.profile-content {
+  &__sidebar {
+    width: 100px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: $sidebarBgColor;
+    border-right: 1px solid $bordersColor;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 42px;
+        height: 42px;
+      }
+    }
+  }
+
+  &__avatar {
+    text-align: center;
+
+    a {
+      display: inline-block;
+      border-radius: 50%;
+      overflow: hidden;
+      line-height: 0;
+      position: relative;
+
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 150px;
+        height: 150px;
+        background: #000000;
+        opacity: 0;
+        color: $overlayTextColor;
+        font-size: 12px;
+        transition: 0.3s;
+      }
+
+      &:hover span {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &__title {
+    margin-top: 14px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  &__table {
+    width: 510px;
+    margin-top: 50px;
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid $bordersColor;
+      padding: 10px 0;
+      font-size: 14px;
+      font-weight: 500;
+
+      .field-value {
+        color: #999999;
+        border: none;
+        outline: none;
+        font-weight: 500;
+        text-align: right;
+        width: 50%;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &__buttons {
+    margin-top: 50px;
+  }
+
+  &__link {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    border-bottom: 1px solid $bordersColor;
+    color: $mainColor;
+    font-size: 14px;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &_red {
+      border-bottom: none;
+      color: $logoutColor;
+    }
+  }
+
+  &__save-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+    height: 37px;
+    color: $buttonTextColor;
+    background: $mainColor;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    margin: 0 auto;
+    transition: 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.chats-content {
+  text-align: center;
+
+  a {
+    display: block;
+    margin-top: 10px;
+    color: $mainColor;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.modal {
+  position: relative;
+  width: 340px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+  background: $mainBgColor;
+  .avatar_hidden {
+    display: none;
+  }
+  &__title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 50px;
+    text-align: center;
+  }
+
+  &__form {
+    margin-top: 50px;
+    margin-left: 30px;
+    margin-right: 30px;
+
+    .description {
+      display: block;
+      color: $mainColor;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__buttons {
+    width: 280px;
+    margin: 50px 30px 30px 30px;
+
+    a {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      background: none;
+      font-size: 14px;
+      transition: 0.2s;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &.button-confirm {
+        background: $mainColor;
+        border-radius: 8px;
+        height: 37px;
+        color: $buttonTextColor;
+        font-weight: 500;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      &.button-register {
+        color: $mainColor;
+        font-weight: 500;
+        margin-top: 14px;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+  }
+}

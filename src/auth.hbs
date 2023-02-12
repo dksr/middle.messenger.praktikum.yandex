@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Auth page</title>
+  <link rel="stylesheet" href="styles.scss">
+</head>
+<body>
+<main class="container">
+  <div class="auth-content">
+    <h1 class="auth-content__title">Вход</h1>
+    <form class="auth-content__form">
+      <div class="field">
+        <input id="login" name="login" type="text" placeholder=" ">
+        <label for="login">Логин</label>
+        <span>Неверный логин</span>
+      </div>
+      <div class="field">
+        <input id="password" name="password" type="password" placeholder=" ">
+        <label for="password">Пароль</label>
+        <span></span>
+      </div>
+    </form>
+    <div class="auth-content__buttons">
+      <a class="button-auth" href="index.hbs">Войти</a>
+      <a class="button-register" href="register.hbs">Нет аккаунта?</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>
