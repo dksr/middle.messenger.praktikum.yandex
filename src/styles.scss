@@ -2,15 +2,15 @@
 
 $fontFamily: 'Ubuntu', sans-serif;
 $mainColor: #3369F3;
-$mainBgColor: #FFFFFF;
-$overlayBgColor: #000000;
-$labelColor: #999999;
+$mainBgColor: #FFF;
+$overlayBgColor: #000;
+$labelColor: #999;
 $textColor: #1E1E1E;
 $errorColor: #FF2F2F;
-$logoutColor: #FF0000;
-$buttonTextColor: #FFFFFF;
+$logoutColor: #F00;
+$buttonTextColor: #FFF;
 $sidebarBgColor: #FBFBFB;
-$overlayTextColor: #FFFFFF;
+$overlayTextColor: #FFF;
 $bordersColor: #EAEAEA;
 
 * {
@@ -56,7 +56,7 @@ body {
   position: relative;
   width: 340px;
   border-radius: 12px;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 0 6px rgb(0 0 0 / 14%);
 
   &__title {
     font-size: 24px;
@@ -251,7 +251,7 @@ body {
         left: 0;
         width: 150px;
         height: 150px;
-        background: #000000;
+        background: #000;
         opacity: 0;
         color: $overlayTextColor;
         font-size: 12px;
@@ -284,7 +284,7 @@ body {
       font-weight: 500;
 
       .field-value {
-        color: #999999;
+        color: #999;
         border: none;
         outline: none;
         font-weight: 500;
@@ -362,11 +362,13 @@ body {
   position: relative;
   width: 340px;
   border-radius: 12px;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 0 6px rgb(0 0 0 / 14%);
   background: $mainBgColor;
+
   .avatar_hidden {
     display: none;
   }
+
   &__title {
     font-size: 24px;
     font-weight: 500;
@@ -394,7 +396,7 @@ body {
 
   &__buttons {
     width: 280px;
-    margin: 50px 30px 30px 30px;
+    margin: 50px 30px 30px;
 
     a {
       width: 100%;
