@@ -4,7 +4,7 @@ $fontFamily: 'Ubuntu', sans-serif;
 $mainColor: #3369F3;
 $mainBgColor: #FFF;
 $overlayBgColor: #000;
-$labelColor: #999;
+$greyTextColor: #999;
 $textColor: #1E1E1E;
 $errorColor: #FF2F2F;
 $logoutColor: #F00;
@@ -12,11 +12,23 @@ $buttonTextColor: #FFF;
 $sidebarBgColor: #FBFBFB;
 $overlayTextColor: #FFF;
 $bordersColor: #EAEAEA;
+$searchBgColor: #EFEFEF;
+$activeChatBgColor: #E4EDFD;
 
 * {
   font-family: $fontFamily;
   color: $textColor;
 }
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
 
 body {
   margin: 0;
@@ -79,7 +91,7 @@ body {
       display: block;
       font-size: 14px;
       font-weight: 500;
-      color: $labelColor;
+      color: $greyTextColor;
       position: absolute;
       top: 0;
       transition: 0.2s;
@@ -120,7 +132,6 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-      text-decoration: none;
       background: none;
       font-size: 14px;
       transition: 0.2s;
@@ -177,7 +188,6 @@ body {
     margin-top: 40px;
     font-weight: 500;
     color: $mainColor;
-    text-decoration: none;
 
     &:hover {
       text-decoration: underline;
@@ -194,7 +204,6 @@ body {
     display: block;
     color: $mainColor;
     margin-bottom: 10px;
-    text-decoration: none;
 
     &:hover {
       text-decoration: underline;
@@ -305,7 +314,6 @@ body {
   &__link {
     display: block;
     padding: 10px 0;
-    text-decoration: none;
     border-bottom: 1px solid $bordersColor;
     color: $mainColor;
     font-size: 14px;
@@ -332,28 +340,12 @@ body {
     border-radius: 8px;
     font-size: 14px;
     font-weight: 500;
-    text-decoration: none;
     text-align: center;
     margin: 0 auto;
     transition: 0.2s;
 
     &:hover {
       opacity: 0.8;
-    }
-  }
-}
-
-.chats-content {
-  text-align: center;
-
-  a {
-    display: block;
-    margin-top: 10px;
-    color: $mainColor;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
     }
   }
 }
@@ -386,7 +378,6 @@ body {
       color: $mainColor;
       text-align: center;
       cursor: pointer;
-      text-decoration: none;
 
       &:hover {
         text-decoration: underline;
@@ -403,7 +394,6 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-      text-decoration: none;
       background: none;
       font-size: 14px;
       transition: 0.2s;
@@ -435,5 +425,167 @@ body {
       }
     }
 
+  }
+}
+
+.chats-content {
+  width: 100%;
+  height: 100vh;
+
+  &__sidebar {
+    position: fixed;
+    width: 350px;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    overflow: auto;
+
+    padding: 0;
+    box-sizing: border-box;
+    background: $sidebarBgColor;
+    border-right: 1px solid $bordersColor;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $greyTextColor;
+    }
+    @media (max-width: 700px) {
+      width: 100%;
+    }
+
+    .sidebar-header {
+      padding: 0 14px;
+    }
+
+    .profile-link {
+      display: flex;
+      justify-content: flex-end;
+      color: $greyTextColor;
+      margin-top: 20px;
+      font-size: 14px;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &::after {
+        content: url('../static/arrow-right.svg');
+        margin-left: 7px;
+      }
+    }
+
+    .search-input {
+      width: 100%;
+      height: 32px;
+      margin-top: 20px;
+      border: none;
+      outline: none;
+      box-shadow: 0 0 0 0 $mainColor;
+      border-radius: 5px;
+      text-align: center;
+      background: $searchBgColor;
+      transition: 0.2s;
+
+      &:focus {
+        box-shadow: 0 0 0 2px $mainColor;
+      }
+
+      &::placeholder {
+        background: url('../static/search-icon.svg') no-repeat 110px -2px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+
+    .chats-list {
+      margin-top: 14px;
+
+      &__item {
+        display: flex;
+        justify-content: flex-start;
+        border-top: 1px solid $bordersColor;
+        padding: 14px;
+        height: 54px;
+
+        &:hover {
+          cursor: pointer;
+          background: $searchBgColor;
+        }
+
+        &.active {
+          background: $activeChatBgColor;
+        }
+
+        img {
+          border-radius: 50%;
+          height: 54px;
+          width: 54px;
+          margin-right: 14px;
+        }
+
+        .group-left {
+          h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 700;
+          }
+
+          p {
+            font-size: 14px;
+            font-weight: 500;
+            color: $greyTextColor;
+            margin: 6px 0 0;
+          }
+        }
+
+        .group-right {
+          margin-left: auto;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: flex-end;
+
+          .date-time {
+            font-size: 12px;
+            font-weight: 500;
+            color: $greyTextColor
+          }
+
+          .unread-count {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 50%;
+            background: $mainColor;
+            color: $buttonTextColor;
+
+            &.hide {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__main {
+    margin-left: 310px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .chats-empty {
+      color: $greyTextColor;
+      font-weight: 500;
+      font-size: 14px;
+    }
   }
 }
