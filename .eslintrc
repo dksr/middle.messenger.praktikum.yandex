@@ -13,6 +13,8 @@
     "semi": ["error", "never"],
     "linebreak-style": "off",
     "no-plusplus": "off",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "import/no-unresolved": "off",
+    "import/extensions": "off"
   }
 }
