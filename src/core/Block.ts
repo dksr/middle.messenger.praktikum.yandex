@@ -1,5 +1,5 @@
+import { nanoid } from 'nanoid'
 import EventBus from './EventBus'
-import {nanoid} from 'nanoid'
 
 export default class Block {
   static EVENTS = {
@@ -19,11 +19,11 @@ export default class Block {
   constructor(tagName = 'div', propsWithChildren: any = {}) {
     const eventBus = new EventBus()
 
-    const {props, children} = this._getChildrenAndProps(propsWithChildren)
+    const { props, children } = this._getChildrenAndProps(propsWithChildren)
 
     this._meta = {
       tagName,
-      props
+      props,
     }
 
     this.props = this._makePropsProxy(props)
@@ -47,13 +47,13 @@ export default class Block {
       }
     })
 
-    return {props, children}
+    return { props, children }
   }
 
   _addEvents() {
-    const {events = {}} = this.props as { events: Record<string, () => void> }
+    const { events = {} } = this.props as { events: Record<string, () => void> }
 
-    Object.keys(events).forEach(eventName => {
+    Object.keys(events).forEach((eventName) => {
       this._element?.addEventListener(eventName, events[eventName])
     })
   }
@@ -66,7 +66,7 @@ export default class Block {
   }
 
   private _createResources() {
-    const {tagName} = this._meta
+    const { tagName } = this._meta
     this._element = this._createDocumentElement(tagName)
     if (this.props.rootClass) {
       this._addRootClass(this.props.rootClass, this._element)
@@ -130,7 +130,7 @@ export default class Block {
   }
 
   protected compile(template: (context: any) => string, context: any) {
-    const contextAndStubs = {...context}
+    const contextAndStubs = { ...context }
 
     Object.entries(this.children).forEach(([name, component]) => {
       contextAndStubs[name] = `<div data-id="${component.id}"></div>`
@@ -152,7 +152,6 @@ export default class Block {
       component.getContent()?.append(...Array.from(stub.childNodes))
 
       stub.replaceWith(component.getContent()!)
-
     })
 
     return temp.content
@@ -177,12 +176,12 @@ export default class Block {
       set(target, prop, value) {
         target[prop] = value
 
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target)
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target)
         return true
       },
       deleteProperty() {
         throw new Error('Нет доступа')
-      }
+      },
     })
   }
 

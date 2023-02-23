@@ -1,6 +1,9 @@
 {
-"extends": "@parcel/config-default",
-"transformers": {
+  "extends": "@parcel/config-default",
+  "transformers": {
     "*.hbs": ["@anikin/parcel-transformer-handlebars-precompile"]
+  },
+  "validators": {
+    "*.{ts, tsx}": ['@parcel/validator-typescript']
   }
 }
