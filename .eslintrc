@@ -21,6 +21,7 @@
     "no-use-before-define": "off",
     "class-methods-use-this": "off",
     "no-param-reassign": "off",
+    "no-useless-constructor": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": "off",

@@ -11,20 +11,14 @@ export default class Block {
 
   public id = nanoid(6)
   protected props: any
-  private readonly _meta: { tagName: string, props: any }
   private _element: HTMLElement | null = null
   public children: Record<string, Block>
   private eventBus: () => EventBus
 
-  constructor(tagName = 'div', propsWithChildren: any = {}) {
+  constructor(propsWithChildren: any = {}) {
     const eventBus = new EventBus()
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren)
-
-    this._meta = {
-      tagName,
-      props,
-    }
 
     this.props = this._makePropsProxy(props)
     this.children = children
@@ -51,7 +45,7 @@ export default class Block {
   }
 
   _addEvents() {
-    const { events = {} } = this.props as { events: Record<string, () => void> }
+    const { events = {} } = this.props as {events: Record<string, () => void>}
 
     Object.keys(events).forEach((eventName) => {
       this._element?.addEventListener(eventName, events[eventName])
@@ -65,23 +59,7 @@ export default class Block {
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this))
   }
 
-  private _createResources() {
-    const { tagName } = this._meta
-    this._element = this._createDocumentElement(tagName)
-    if (this.props.rootClass) {
-      this._addRootClass(this.props.rootClass, this._element)
-    }
-  }
-
-  private _addRootClass(classList: string | string[], element: HTMLElement) {
-    if (typeof classList === 'string') {
-      classList = new Array(classList)
-    }
-    element.classList.add(...classList)
-  }
-
   private _init() {
-    this._createResources()
     this.init()
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
   }
@@ -124,8 +102,12 @@ export default class Block {
 
   private _render() {
     const fragment = this.render()
-    this._element!.innerHTML = ''
-    this._element!.append(fragment)
+    const newElement = fragment.firstElementChild as HTMLElement
+    if (this._element) {
+      this._element.replaceWith(newElement)
+    }
+    this._element = newElement
+
     this._addEvents()
   }
 
