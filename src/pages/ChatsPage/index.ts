@@ -4,6 +4,6 @@ import chatImg from '../../../static/chat-img.png'
 
 export default class ChatsPage extends Block {
   render() {
-    return this.compile(template, { ...this.props, chatImg })
+    return this.compile(template, { chatImg })
   }
 }

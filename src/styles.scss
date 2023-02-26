@@ -124,10 +124,9 @@ body {
 
   &__buttons {
     width: 280px;
-    margin: 30px;
-    margin-top: 50px;
+    margin: 50px 0 30px;
 
-    a {
+    a, button {
       width: 100%;
       display: flex;
       justify-content: center;
@@ -135,6 +134,7 @@ body {
       background: none;
       font-size: 14px;
       transition: 0.2s;
+      border: none;
 
       &:hover {
         cursor: pointer;
@@ -439,7 +439,6 @@ body {
     top: 0;
     left: 0;
     overflow: auto;
-
     padding: 0;
     box-sizing: border-box;
     background: $sidebarBgColor;
@@ -448,9 +447,11 @@ body {
     &::-webkit-scrollbar {
       width: 4px;
     }
+
     &::-webkit-scrollbar-thumb {
       background-color: $greyTextColor;
     }
+
     @media (max-width: 700px) {
       width: 100%;
     }

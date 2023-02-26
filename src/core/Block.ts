@@ -76,6 +76,8 @@ export default class Block {
 
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM)
+
+    Object.values(this.children).forEach((child) => child.dispatchComponentDidMount())
   }
 
   private _componentDidUpdate(_oldProps: any, _newProps: any) {

@@ -1,16 +1,20 @@
 import HomePage from '../pages/HomePage'
+import AuthPage from '../pages/AuthPage'
+import RegPage from '../pages/RegPage'
 import ChatsPage from '../pages/ChatsPage'
+import ProfilePage from '../pages/ProfilePage'
+import ProfileEditPage from '../pages/ProfileEditPage'
+import ProfilePasswordEditPage from '../pages/ProfilePasswordEditPage'
 import ErrorPage from '../pages/ErrorPage'
 
-const ROUTES = {
+export const ROUTES = {
   home: HomePage,
-  // auth: AuthPage,
-  // reg: RegPage,
+  auth: AuthPage,
+  reg: RegPage,
   chats: ChatsPage,
-  // profile: ProfilePage,
-  // 'profile-edit': ProfileEditPage,
-  // 'profile-password-edit': ProfilePasswordEditPage,
-  // 'profile-avatar-edit': ProfileAvatarEditPage,
+  profile: ProfilePage,
+  'profile-edit': ProfileEditPage,
+  'profile-password-edit': ProfilePasswordEditPage,
   error: ErrorPage,
 }
 
