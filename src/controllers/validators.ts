@@ -1,5 +1,5 @@
-import AuthForm from '../../components/business/AuthForm'
-import RegForm from '../../components/business/RegForm'
+import AuthForm from '../components/business/AuthForm'
+import RegForm from '../components/business/RegForm'
 
 type FormComponent = AuthForm | RegForm
 
