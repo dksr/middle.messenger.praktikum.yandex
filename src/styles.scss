@@ -22,7 +22,14 @@ $activeChatBgColor: #E4EDFD;
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
 
 ul {
   list-style: none;
@@ -300,7 +307,9 @@ body {
         text-align: right;
         width: 50%;
       }
-
+      &.error .field-value {
+        color: $errorColor
+      }
       &:last-child {
         border-bottom: none;
       }

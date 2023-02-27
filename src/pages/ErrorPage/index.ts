@@ -1,6 +1,6 @@
 import Block from '../../core/Block'
 import template from './errorPage.hbs'
-import Error from '../../components/Error'
+import Error from '../../components/business/Error'
 import renderDOM from '../../utils/renderDOM'
 
 function returnToHome(e: MouseEvent):void {

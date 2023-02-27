@@ -1,5 +1,5 @@
-import AuthForm from '../../components/AuthForm'
-import RegForm from '../../components/RegForm'
+import AuthForm from '../../components/business/AuthForm'
+import RegForm from '../../components/business/RegForm'
 
 type FormComponent = AuthForm | RegForm
 
@@ -28,6 +28,15 @@ export function passwordValidator(this: FormComponent, element: HTMLInputElement
   const error = _hasError(element, regex)
 
   this.children.PasswordField.setProps({
+    hasError: error,
+  })
+  return !error
+}
+export function oldPasswordValidator(this: FormComponent, element: HTMLInputElement) {
+  const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/
+  const error = _hasError(element, regex)
+
+  this.children.OldPasswordField.setProps({
     hasError: error,
   })
   return !error
@@ -95,6 +104,12 @@ export function isValidForm(this: FormComponent, form: HTMLFormElement) {
     }
     if (input.name === 'password') {
       valid = passwordValidator.bind(this)(input) && valid
+      if (valid) {
+        data[input.name] = input.value
+      }
+    }
+    if (input.name === 'old_password') {
+      valid = oldPasswordValidator.bind(this)(input) && valid
       if (valid) {
         data[input.name] = input.value
       }
