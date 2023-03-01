@@ -90,6 +90,15 @@ export function phoneValidator(this: FormComponent, element: HTMLInputElement) {
   })
   return !error
 }
+export function messageValidator(this: FormComponent, element: HTMLInputElement) {
+  const regex = /^\S+$/
+  const error = _hasError(element, regex)
+
+  this.children.MessageField.setProps({
+    hasError: error,
+  })
+  return !error
+}
 
 export function isValidForm(this: FormComponent, form: HTMLFormElement) {
   let valid = true
@@ -140,6 +149,13 @@ export function isValidForm(this: FormComponent, form: HTMLFormElement) {
     }
     if (input.name === 'phone') {
       valid = phoneValidator.bind(this)(input) && valid
+      if (valid) {
+        data[input.name] = input.value
+      }
+    }
+    if (input.name === 'message') {
+      console.log(input.value)
+      valid = messageValidator.bind(this)(input) && valid
       if (valid) {
         data[input.name] = input.value
       }

@@ -1,16 +1,27 @@
 import template from './chatsPage.hbs'
 import Block from '../../core/Block'
-import chatImg from '../../../static/chat-img.png'
-import btnSettings from '../../../static/btn-setting.svg'
-import readStatus from '../../../static/read-status.svg'
-import messageImg from '../../../static/message-img.jpg'
-import attachImg from '../../../static/attach.svg'
-import btnMessageSubmit from '../../../static/btn-message-submit.svg'
+import ChatsSidebar from '../../components/business/ChatsSidebar'
+import ChatsMain from '../../components/business/ChatsMain'
 
 export default class ChatsPage extends Block {
-  render() {
-    return this.compile(template, {
-      chatImg, btnSettings, readStatus, messageImg, attachImg, btnMessageSubmit,
+  init() {
+    this.children = {
+      chatsSidebar: new ChatsSidebar({
+        showChat: this.showChat.bind(this),
+      }),
+      chatsMain: new ChatsMain({
+        showChat: false,
+      }),
+    }
+  }
+
+  showChat(show: boolean) {
+    this.children.chatsMain.setProps({
+      showChat: show,
     })
+  }
+
+  render() {
+    return this.compile(template, {})
   }
 }
