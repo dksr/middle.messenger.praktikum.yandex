@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import EventBus from './EventBus'
 
-export default class Block {
+export default class Block<Props extends Record<string, any> = any> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -10,7 +10,7 @@ export default class Block {
   }
 
   public id = nanoid(6)
-  protected props: any
+  protected props: Props
   private _element: HTMLElement | null = null
   public children: Record<string, Block>
   private eventBus: () => EventBus
@@ -29,7 +29,7 @@ export default class Block {
     eventBus.emit(Block.EVENTS.INIT)
   }
 
-  _getChildrenAndProps(childrenAndProps: any) {
+  private _getChildrenAndProps(childrenAndProps: any) {
     const props: Record<string, any> = {}
     const children: Record<string, Block> = {}
 
@@ -44,11 +44,19 @@ export default class Block {
     return { props, children }
   }
 
-  _addEvents() {
-    const { events = {} } = this.props as {events: Record<string, () => void>}
+  private _addEvents() {
+    const { events = {} } = this.props
 
     Object.keys(events).forEach((eventName) => {
       this._element?.addEventListener(eventName, events[eventName])
+    })
+  }
+
+  private _removeEvents() {
+    const { events = {} } = this.props
+
+    Object.keys(events).forEach((eventName) => {
+      this._element?.removeEventListener(eventName, events[eventName])
     })
   }
 
@@ -80,17 +88,17 @@ export default class Block {
     Object.values(this.children).forEach((child) => child.dispatchComponentDidMount())
   }
 
-  private _componentDidUpdate(_oldProps: any, _newProps: any) {
+  private _componentDidUpdate(_oldProps: Props, _newProps: Props) {
     if (this.componentDidUpdate(_oldProps, _newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
   }
 
-  protected componentDidUpdate(_oldProps: any, _newProps: any) {
+  protected componentDidUpdate(_oldProps: Props, _newProps: Props) {
     return true
   }
 
-  setProps = (nextProps: any) => {
+  setProps = (nextProps: Partial<Props>) => {
     if (!nextProps) {
       return
     }
@@ -104,6 +112,8 @@ export default class Block {
 
   private _render() {
     const fragment = this.render()
+    this._removeEvents()
+
     const newElement = fragment.firstElementChild as HTMLElement
     if (this._element) {
       this._element.replaceWith(newElement)
@@ -167,10 +177,6 @@ export default class Block {
         throw new Error('Нет доступа')
       },
     })
-  }
-
-  _createDocumentElement(tagName: string) {
-    return document.createElement(tagName)
   }
 
   show() {

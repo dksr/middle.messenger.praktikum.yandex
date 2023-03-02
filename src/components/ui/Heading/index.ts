@@ -7,11 +7,7 @@ interface IHeadingProps {
   class?: string
 }
 
-export default class Heading extends Block {
-  constructor(props: IHeadingProps) {
-    super(props)
-  }
-
+export default class Heading extends Block<IHeadingProps> {
   render() {
     return this.compile(template, this.props)
   }

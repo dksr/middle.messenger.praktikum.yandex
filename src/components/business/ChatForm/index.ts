@@ -9,14 +9,14 @@ import { isValidForm, messageValidator } from '../../../controllers/validators'
 export default class ChatForm extends Block {
   init() {
     this.children = {
-      MessageField: new FieldMessage({
+      FieldMessage: new FieldMessage({
         name: 'message',
         type: 'text',
         class: 'message_input',
         hasError: false,
         placeholder: 'Сообщение',
         events: {
-          blur: (e) => messageValidator.bind(this)(e.target as HTMLInputElement),
+          blur: (event: Event) => messageValidator.bind(this)(event.target as HTMLInputElement),
         },
       }),
       SubmitButton: new Button({

@@ -5,7 +5,7 @@ import Link from '../../ui/Link'
 import renderDOM from '../../../utils/renderDOM'
 
 export default class ProfileSidebar extends Block {
-  protected init() {
+  init() {
     this.children = {
       BackLink: new Link({
         label: `<img src="${backImg}"" alt="back">`,

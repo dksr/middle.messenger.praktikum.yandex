@@ -11,11 +11,7 @@ interface IInputProps {
   events?: Record<string, (event: Event) => void>
 }
 
-export default class Input extends Block {
-  constructor(props: IInputProps) {
-    super(props)
-  }
-
+export default class Input extends Block<IInputProps> {
   render() {
     return this.compile(template, this.props)
   }

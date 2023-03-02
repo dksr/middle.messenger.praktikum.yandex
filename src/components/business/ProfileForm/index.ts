@@ -3,6 +3,7 @@ import template from './profileForm.hbs'
 import FieldRow from '../../ui/FieldRow'
 import Button from '../../ui/Button'
 import {
+  chatNameValidator,
   emailValidator, firstNameValidator, isValidForm, loginValidator,
   phoneValidator, secondNameValidator,
 } from '../../../controllers/validators'
@@ -14,6 +15,7 @@ export default class ProfileForm extends Block {
         label: 'Почта',
         name: 'email',
         hasError: false,
+        errorText: 'Неверный e-mail',
         type: 'text',
         class: 'field-value',
         value: 'pochta@yandex.ru',
@@ -25,6 +27,7 @@ export default class ProfileForm extends Block {
         label: 'Логин',
         name: 'login',
         hasError: false,
+        errorText: 'Логин от 3 до 20 символов, латиница, может содержать цифры, _ и -',
         type: 'text',
         class: 'field-value',
         value: 'ivanivanov',
@@ -36,6 +39,7 @@ export default class ProfileForm extends Block {
         label: 'Имя',
         name: 'first_name',
         hasError: false,
+        errorText: 'Имя должно начинаться с большой буквы, без пробелов, цифр и спецсимволов',
         type: 'text',
         class: 'field-value',
         value: 'Иван',
@@ -47,6 +51,7 @@ export default class ProfileForm extends Block {
         label: 'Фамилия',
         name: 'second_name',
         hasError: false,
+        errorText: 'Фамилия должна начинаться с большой буквы, без пробелов, цифр и спецсимволов',
         type: 'text',
         class: 'field-value',
         value: 'Иванов',
@@ -54,10 +59,23 @@ export default class ProfileForm extends Block {
           blur: (e: Event) => secondNameValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
+      ChatNameField: new FieldRow({
+        label: 'Имя в чате',
+        name: 'display_name',
+        hasError: false,
+        errorText: 'Имя в чате должно начинаться с большой буквы, без пробелов, цифр и спецсимволов',
+        type: 'text',
+        class: 'field-value',
+        value: 'Иван',
+        events: {
+          blur: (e: Event) => chatNameValidator.bind(this)(e.target as HTMLInputElement),
+        },
+      }),
       PhoneField: new FieldRow({
         label: 'Телефон',
         name: 'phone',
         hasError: false,
+        errorText: 'от 10 до 15 символов, состоит из цифр, может начинается с плюса',
         type: 'text',
         class: 'field-value',
         value: '+74951234567',
@@ -68,6 +86,7 @@ export default class ProfileForm extends Block {
       SubmitButton: new Button({
         label: 'Сохранить',
         class: 'profile-content__save-button',
+        type: 'submit',
       }),
     }
 

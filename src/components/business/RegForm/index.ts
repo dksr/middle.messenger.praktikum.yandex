@@ -25,7 +25,7 @@ export default class RegForm extends Block {
       }),
       LoginField: new Field({
         label: 'Логин',
-        errorText: 'Логин от 3 до 20 символов, латиница, может содержать цифры, без спецсимволов и пробелов, кроме _ и -',
+        errorText: 'Логин от 3 до 20 символов, латиница, может содержать цифры, _ и -',
         hasError: false,
         id: 'login',
         name: 'login',

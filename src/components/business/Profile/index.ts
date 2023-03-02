@@ -13,11 +13,8 @@ interface IProfileProps {
   editProfilePassword: boolean
 }
 
-export default class Profile extends Block {
-  constructor(props: IProfileProps) {
-    super(props)
-  }
-  protected init() {
+export default class Profile extends Block<IProfileProps> {
+  init() {
     this.children = {
       ProfileAvatar: new ProfileAvatar({
         showEditAvatarModal: false,

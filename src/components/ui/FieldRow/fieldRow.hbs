@@ -1,4 +1,9 @@
-<div class="row{{#if hasError}} error{{/if}}">
+<div class="row">
   <span class="field-name">{{label}}</span>
   {{{Input}}}
+  {{#if hasError}}
+    <div class="error">
+      {{errorText}}
+    </div>
+  {{/if}}
 </div>

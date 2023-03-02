@@ -10,16 +10,12 @@ interface IAuthFormProps {
   events?: Record<string, (e: Event) => void>
 }
 
-export default class AuthForm extends Block {
-  constructor(props: IAuthFormProps) {
-    super(props)
-  }
-
+export default class AuthForm extends Block<IAuthFormProps> {
   init() {
     this.children = {
       LoginField: new Field({
         label: 'Логин',
-        errorText: 'Логин от 3 до 20 символов, латиница, может содержать цифры, без спецсимволов и пробелов, кроме _ и -',
+        errorText: 'Логин от 3 до 20 символов, латиница, может содержать цифры, _ и -',
         hasError: false,
         id: 'login',
         name: 'login',

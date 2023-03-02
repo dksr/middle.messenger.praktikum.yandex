@@ -17,26 +17,30 @@ type opt = {
   headers?: unknown
 }
 
+type HTTPMethod = (url: string, options?: opt) => Promise<unknown>
+
 export default class HTTPTransport {
-  get(url: string, options: opt = {}) {
+  get: HTTPMethod = (url, options = {}) => {
     if (options.data && typeof options.data === 'object') {
       options.data = queryStringify(options.data)
       url += options.data
     }
     return this.request(url, { ...options, method: METHODS.GET }, options.timeout)
   }
-  post(url: string, options: opt = {}) {
-    return this.request(url, { ...options, method: METHODS.POST }, options.timeout)
-  }
-  put(url: string, options: opt = {}) {
-    return this.request(url, { ...options, method: METHODS.PUT }, options.timeout)
-  }
-  patch(url: string, options: opt = {}) {
-    return this.request(url, { ...options, method: METHODS.PATCH }, options.timeout)
-  }
-  delete(url: string, options: opt = {}) {
-    return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout)
-  }
+
+  post: HTTPMethod = (url, options = {}) => (
+    this.request(url, { ...options, method: METHODS.POST }, options.timeout)
+  )
+
+  put: HTTPMethod = (url, options = {}) => (
+    this.request(url, { ...options, method: METHODS.PUT }, options.timeout)
+  )
+  patch: HTTPMethod = (url, options = {}) => (
+    this.request(url, { ...options, method: METHODS.PATCH }, options.timeout)
+  )
+  delete: HTTPMethod = (url, options = {}) => (
+    this.request(url, { ...options, method: METHODS.DELETE }, options.timeout)
+  )
 
   request = (
     url: string,

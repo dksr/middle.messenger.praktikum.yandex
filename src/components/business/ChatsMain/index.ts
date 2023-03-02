@@ -9,15 +9,12 @@ import Tag from '../../ui/Tag'
 import ChatForm from '../ChatForm'
 
 interface IChatsMainProps {
+  showChatModal: boolean,
   showChat: boolean
 }
 
-export default class ChatsMain extends Block {
-  constructor(props: IChatsMainProps) {
-    super(props)
-  }
-
-  protected init() {
+export default class ChatsMain extends Block<IChatsMainProps> {
+  init() {
     this.children = {
       LinkSettings: new Link({
         label: `<img src="${btnSettings}" alt="settings button">`,

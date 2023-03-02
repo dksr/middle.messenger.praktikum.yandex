@@ -14,15 +14,11 @@ interface IFieldRowProps {
   events?: Record<string, any>
 }
 
-export default class FieldRow extends Block {
+export default class FieldRow extends Block<IFieldRowProps> {
   init() {
     this.children = {
       Input: new Input(this.props),
     }
-  }
-
-  constructor(props: IFieldRowProps) {
-    super(props)
   }
 
   render() {

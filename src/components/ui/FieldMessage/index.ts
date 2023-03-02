@@ -13,12 +13,8 @@ interface IFieldMessageProps {
   events?: Record<string, (event: Event) => void>
 }
 
-export default class FieldMessage extends Block {
-  constructor(props: IFieldMessageProps) {
-    super(props)
-  }
-
-  protected init() {
+export default class FieldMessage extends Block<IFieldMessageProps> {
+  init() {
     this.children.Input = new Input(this.props)
   }
 

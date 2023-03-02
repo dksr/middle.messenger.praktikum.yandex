@@ -16,6 +16,7 @@ export default class ProfilePasswordForm extends Block {
         label: 'Старый пароль',
         name: 'old_password',
         hasError: false,
+        errorText: 'Пароль неверный',
         type: 'password',
         class: 'field-value',
         value: '111111111bbbBBB',
@@ -27,6 +28,7 @@ export default class ProfilePasswordForm extends Block {
         label: 'Новый пароль',
         name: 'password',
         hasError: false,
+        errorText: 'от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра',
         type: 'password',
         class: 'field-value',
         value: '11111111aaaAAA',
@@ -37,6 +39,7 @@ export default class ProfilePasswordForm extends Block {
       PasswordConfirmField: new FieldRow({
         label: 'Повторите новый пароль',
         hasError: false,
+        errorText: 'Пароли не совпадают',
         id: 'password_confirm',
         name: 'password_confirm',
         type: 'password',

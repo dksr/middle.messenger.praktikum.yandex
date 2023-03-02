@@ -12,11 +12,7 @@ interface IFieldProps {
   events?: Record<string, any>
 }
 
-export default class Field extends Block {
-  constructor(props: IFieldProps) {
-    super(props)
-  }
-
+export default class Field extends Block<IFieldProps> {
   init() {
     this.children.Input = new Input(this.props)
   }

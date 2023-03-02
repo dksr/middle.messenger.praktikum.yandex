@@ -81,6 +81,15 @@ export function secondNameValidator(this: FormComponent, element: HTMLInputEleme
   })
   return !error
 }
+export function chatNameValidator(this: FormComponent, element: HTMLInputElement) {
+  const regex = /^[A-ZА-ЯЁ][a-zа-яё-]*$/
+  const error = _hasError(element, regex)
+
+  this.children.ChatNameField.setProps({
+    hasError: error,
+  })
+  return !error
+}
 export function phoneValidator(this: FormComponent, element: HTMLInputElement) {
   const regex = /^\+?\d{10,15}$/
   const error = _hasError(element, regex)
@@ -94,7 +103,7 @@ export function messageValidator(this: FormComponent, element: HTMLInputElement)
   const regex = /^\S+$/
   const error = _hasError(element, regex)
 
-  this.children.MessageField.setProps({
+  this.children.FieldMessage.setProps({
     hasError: error,
   })
   return !error
@@ -147,6 +156,12 @@ export function isValidForm(this: FormComponent, form: HTMLFormElement) {
         data[input.name] = input.value
       }
     }
+    if (input.name === 'display_name') {
+      valid = chatNameValidator.bind(this)(input) && valid
+      if (valid) {
+        data[input.name] = input.value
+      }
+    }
     if (input.name === 'phone') {
       valid = phoneValidator.bind(this)(input) && valid
       if (valid) {
@@ -154,7 +169,6 @@ export function isValidForm(this: FormComponent, form: HTMLFormElement) {
       }
     }
     if (input.name === 'message') {
-      console.log(input.value)
       valid = messageValidator.bind(this)(input) && valid
       if (valid) {
         data[input.name] = input.value

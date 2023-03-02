@@ -20,7 +20,7 @@ export default class ChatsSidebar extends Block {
         class: 'search-input',
         placeholder: 'Поиск',
         events: {
-          keyup: (event) => console.log((event.target as HTMLInputElement).value),
+          keyup: (event: Event) => console.log((event.target as HTMLInputElement).value),
         },
       }),
       ChatsList: new ChatsList({

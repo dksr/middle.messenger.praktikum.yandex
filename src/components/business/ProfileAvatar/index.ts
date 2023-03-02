@@ -9,12 +9,8 @@ interface IProfileAvatarProps {
   events?: Record<string, (event: Event) => void>
 }
 
-export default class ProfileAvatar extends Block {
-  constructor(props: IProfileAvatarProps) {
-    super(props)
-  }
-
-  protected init() {
+export default class ProfileAvatar extends Block<IProfileAvatarProps> {
+  init() {
     this.children = {
       AvatarLink: new Link({
         label: `

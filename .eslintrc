@@ -21,7 +21,6 @@
     "no-use-before-define": "off",
     "class-methods-use-this": "off",
     "no-param-reassign": "off",
-    "no-useless-constructor": "off",
     "guard-for-in": "off",
     "no-restricted-syntax": "off",
     "@typescript-eslint/no-non-null-assertion": "off",

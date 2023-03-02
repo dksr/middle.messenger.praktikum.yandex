@@ -9,11 +9,7 @@ interface ITagProps {
   events?: Record<string, (e?: Event) => void>
 }
 
-export default class Tag extends Block {
-  constructor(props: ITagProps) {
-    super(props)
-  }
-
+export default class Tag extends Block<ITagProps> {
   render() {
     return this.compile(template, this.props)
   }

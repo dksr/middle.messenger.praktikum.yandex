@@ -9,10 +9,7 @@ interface ILinkProps {
   events?: Record<string, (e?: Event) => void>
 }
 
-export default class Link extends Block {
-  constructor(props: ILinkProps) {
-    super(props)
-  }
+export default class Link extends Block<ILinkProps> {
   render() {
     return this.compile(template, this.props)
   }

@@ -11,6 +11,8 @@ export default class ChatsPage extends Block {
       }),
       chatsMain: new ChatsMain({
         showChat: false,
+        showChatModal: false,
+        notExist: 'notExist',
       }),
     }
   }

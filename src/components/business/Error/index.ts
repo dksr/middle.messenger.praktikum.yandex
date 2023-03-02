@@ -1,7 +1,7 @@
 import Block from '../../../core/Block'
 import template from './error.hbs'
 
-interface IError {
+interface IErrorProps {
   title: string,
   description: string,
   events: {
@@ -9,11 +9,7 @@ interface IError {
   }
 }
 
-export default class Error extends Block {
-  constructor(props: IError) {
-    super(props)
-  }
-
+export default class Error extends Block<IErrorProps> {
   render() {
     return this.compile(template, this.props)
   }
