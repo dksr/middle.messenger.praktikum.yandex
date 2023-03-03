@@ -1,0 +1,20 @@
+<div class="profile-main">
+  {{{ProfileAvatar}}}
+  {{{ProfileHeading}}}
+  {{#unless editProfile}}
+    {{#unless editProfilePassword}}
+      {{{ProfileTable}}}
+      <div class="profile-content__buttons">
+        {{{ProfileEditLink}}}
+        {{{ProfilePasswordEditLink}}}
+        {{{ProfileLogoutLink}}}
+      </div>
+    {{/unless}}
+  {{/unless}}
+  {{#if editProfile}}
+    {{{ProfileForm}}}
+  {{/if}}
+  {{#if editProfilePassword}}
+    {{{ProfilePasswordForm}}}
+  {{/if}}
+</div>
