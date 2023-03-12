@@ -15,7 +15,7 @@ export default class Block<Props extends Record<string, any> = any> {
   public children: Record<string, Block>
   private eventBus: () => EventBus
 
-  constructor(propsWithChildren: any = {}) {
+  constructor(propsWithChildren: Props = {} as Props) {
     const eventBus = new EventBus()
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren)

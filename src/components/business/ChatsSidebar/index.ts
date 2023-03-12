@@ -3,8 +3,8 @@ import template from './chatsSidebar.hbs'
 import Link from '../../ui/Link'
 import Input from '../../ui/Input'
 import ChatsList from '../ChatsList'
-import renderDOM from '../../../utils/renderDOM'
 import chatImg from '../../../../static/chat-img.png'
+import Router from '../../../utils/Router'
 
 export default class ChatsSidebar extends Block {
   init() {
@@ -13,7 +13,7 @@ export default class ChatsSidebar extends Block {
         label: 'Профиль',
         class: 'profile-link',
         events: {
-          click: () => renderDOM('profile'),
+          click: () => Router.go('/settings'),
         },
       }),
       InputSearch: new Input({

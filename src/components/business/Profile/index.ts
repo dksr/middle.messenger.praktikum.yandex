@@ -4,9 +4,9 @@ import ProfileAvatar from '../ProfileAvatar'
 import Heading from '../../ui/Heading'
 import ProfileTable from '../ProfileTable'
 import Link from '../../ui/Link'
-import renderDOM from '../../../utils/renderDOM'
 import ProfileForm from '../ProfileForm'
 import ProfilePasswordForm from '../ProfilePasswordForm'
+import Router from '../../../utils/Router'
 
 interface IProfileProps {
   editProfile: boolean,
@@ -53,7 +53,7 @@ export default class Profile extends Block<IProfileProps> {
         label: 'Выйти',
         class: 'profile-content__link profile-content__link_red',
         events: {
-          click: () => renderDOM('home'),
+          click: () => Router.go('/'),
         },
       }),
       ProfileForm: new ProfileForm({}),

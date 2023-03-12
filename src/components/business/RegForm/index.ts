@@ -3,11 +3,11 @@ import template from './regForm.hbs'
 import Field from '../../ui/Field'
 import Button from '../../ui/Button'
 import Link from '../../ui/Link'
-import renderDOM from '../../../utils/renderDOM'
 import {
   emailValidator, firstNameValidator, secondNameValidator, isValidForm,
   loginValidator, phoneValidator, passwordValidator, passwordConfirmValidator,
 } from '../../../controllers/validators'
+import Router from '../../../utils/Router'
 
 export default class RegForm extends Block {
   init() {
@@ -98,7 +98,7 @@ export default class RegForm extends Block {
         label: 'Войти',
         class: 'button-register',
         events: {
-          click: () => renderDOM('auth'),
+          click: () => Router.go('/'),
         },
       }),
     }

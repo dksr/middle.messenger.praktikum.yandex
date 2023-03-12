@@ -3,8 +3,8 @@ import template from './authForm.hbs'
 import Field from '../../ui/Field'
 import Button from '../../ui/Button'
 import Link from '../../ui/Link'
-import renderDOM from '../../../utils/renderDOM'
 import { isValidForm, loginValidator, passwordValidator } from '../../../controllers/validators'
+import Router from '../../../utils/Router'
 
 interface IAuthFormProps {
   events?: Record<string, (e: Event) => void>
@@ -44,7 +44,7 @@ export default class AuthForm extends Block<IAuthFormProps> {
         label: 'Нет аккаунта?',
         class: 'button-register',
         events: {
-          click: () => renderDOM('reg'),
+          click: () => Router.go('/sign-up'),
         },
       }),
     }
