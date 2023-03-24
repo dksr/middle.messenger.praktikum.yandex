@@ -5,6 +5,8 @@ import Button from '../../ui/Button'
 import Link from '../../ui/Link'
 import { isValidForm, loginValidator, passwordValidator } from '../../../controllers/validators'
 import Router from '../../../utils/Router'
+import AuthController from '../../../controllers/AuthController'
+import { SigninData } from '../../../api/AuthAPI'
 
 interface IAuthFormProps {
   events?: Record<string, (e: Event) => void>
@@ -51,18 +53,20 @@ export default class AuthForm extends Block<IAuthFormProps> {
 
     this.setProps({
       events: {
-        submit: (e: Event) => {
-          e.preventDefault()
-          const form = e.target as HTMLFormElement
-          const data = isValidForm.bind(this)(form)
-          if (data) {
-            console.log(data)
-          } else {
-            console.log('Форма не валидна')
-          }
-        },
+        submit: this.onSubmit.bind(this),
       },
     })
+  }
+
+  onSubmit(e: Event) {
+    e.preventDefault()
+    const form = e.target as HTMLFormElement
+    const data = isValidForm.bind(this)(form)
+    if (data) {
+      AuthController.signin(data as unknown as SigninData)
+    } else {
+      console.error('Форма не валидна')
+    }
   }
 
   render() {

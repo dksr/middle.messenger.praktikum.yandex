@@ -92,17 +92,20 @@ export default class ProfileForm extends Block {
 
     this.setProps({
       events: {
-        submit: (e: Event) => {
-          e.preventDefault()
-          const data = isValidForm.bind(this)(e.target as HTMLFormElement)
-          if (data) {
-            console.log(data)
-          } else {
-            console.log('Форма не валидна')
-          }
-        },
+        submit: this.onSubmit.bind(this),
       },
     })
+  }
+
+  onSubmit(e: Event) {
+    e.preventDefault()
+    const form = e.target as HTMLFormElement
+    const data = isValidForm.bind(this)(form)
+    if (data) {
+      console.log(data)
+    } else {
+      console.log('Форма не валидна')
+    }
   }
 
   render() {

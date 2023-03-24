@@ -8,6 +8,9 @@ import {
   loginValidator, phoneValidator, passwordValidator, passwordConfirmValidator,
 } from '../../../controllers/validators'
 import Router from '../../../utils/Router'
+import AuthController from '../../../controllers/AuthController'
+import { SignupData } from '../../../api/AuthAPI'
+import { Routes } from '../../../index'
 
 export default class RegForm extends Block {
   init() {
@@ -98,27 +101,29 @@ export default class RegForm extends Block {
         label: 'Войти',
         class: 'button-register',
         events: {
-          click: () => Router.go('/'),
+          click: () => Router.go(Routes.Home),
         },
       }),
     }
 
     this.setProps({
       events: {
-        submit: (e: Event) => {
-          e.preventDefault()
-          const data = isValidForm.bind(this)(e.target as HTMLFormElement)
-          if (data) {
-            console.log(data)
-          } else {
-            console.log('Форма не валидна')
-          }
-        },
+        submit: this.onSubmit.bind(this),
       },
     })
   }
 
-  protected render(): DocumentFragment {
+  onSubmit(e: Event) {
+    e.preventDefault()
+    const data = isValidForm.bind(this)(e.target as HTMLFormElement)
+    if (data) {
+      AuthController.signup(data as unknown as SignupData)
+    } else {
+      console.error('Форма не валидна')
+    }
+  }
+
+  render() {
     return this.compile(template, this.props)
   }
 }

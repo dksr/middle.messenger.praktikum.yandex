@@ -1,7 +1,6 @@
 import AuthForm from '../components/business/AuthForm'
-import RegForm from '../components/business/RegForm'
 
-type FormComponent = AuthForm | RegForm
+type FormComponent = AuthForm
 
 function _hasError(element: HTMLInputElement, regex: RegExp) {
   const str = element.value

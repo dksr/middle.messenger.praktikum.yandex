@@ -23,7 +23,7 @@ export default class EventBus {
 
   emit(event: string, ...args: any[]) {
     if (!this.listeners[event]) {
-      throw new Error(`Event ${event} не существует`)
+      return
     }
     this.listeners[event].forEach((callback) => {
       callback(...args)
