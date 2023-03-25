@@ -1,8 +1,11 @@
 import Block from '../../../core/Block'
 import template from './profileTable.hbs'
+import { withUser } from '../../../core/Store'
 
-export default class ProfileTable extends Block {
+class ProfileTable extends Block {
   render() {
-    return this.compile(template, {})
+    return this.compile(template, this.props)
   }
 }
+
+export default withUser(ProfileTable)

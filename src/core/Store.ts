@@ -16,7 +16,7 @@ interface State {
   selectedChat?: number;
 }
 
-export class Store extends EventBus {
+class Store extends EventBus {
   private state: any = {}
 
   public set(keypath: string, data: unknown) {
@@ -57,3 +57,5 @@ export function withStore<SP extends Record<string, any>>(mapStateToProps: (stat
 }
 
 export default store
+
+export const withUser = withStore((state) => ({ ...state.user }))

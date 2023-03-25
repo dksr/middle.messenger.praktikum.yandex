@@ -7,13 +7,16 @@ import Link from '../../ui/Link'
 import ProfileForm from '../ProfileForm'
 import ProfilePasswordForm from '../ProfilePasswordForm'
 import Router from '../../../utils/Router'
+import { withUser } from '../../../core/Store'
+import { Routes } from '../../../index'
+import { User } from '../../../api/AuthAPI'
 
-interface IProfileProps {
+interface IProfileProps extends User{
   editProfile: boolean,
-  editProfilePassword: boolean
+  editProfilePassword: boolean,
 }
 
-export default class Profile extends Block<IProfileProps> {
+class Profile extends Block<IProfileProps> {
   init() {
     this.children = {
       ProfileAvatar: new ProfileAvatar({
@@ -23,7 +26,7 @@ export default class Profile extends Block<IProfileProps> {
         },
       }),
       ProfileHeading: new Heading({
-        label: 'Иван',
+        label: this.props.first_name,
         class: 'profile-content__title',
       }),
       ProfileTable: new ProfileTable({}),
@@ -53,7 +56,7 @@ export default class Profile extends Block<IProfileProps> {
         label: 'Выйти',
         class: 'profile-content__link profile-content__link_red',
         events: {
-          click: () => Router.go('/'),
+          click: () => Router.go(Routes.Home),
         },
       }),
       ProfileForm: new ProfileForm({}),
@@ -79,3 +82,6 @@ export default class Profile extends Block<IProfileProps> {
     return this.compile(template, this.props)
   }
 }
+
+// @ts-ignore
+export default withUser(Profile)
