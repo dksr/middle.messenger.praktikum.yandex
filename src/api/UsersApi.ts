@@ -14,6 +14,10 @@ export class UsersApi extends BaseAPI {
     return this.http.put('/password', data)
   }
 
+  updateUserAvatar(data: FormData) {
+    return this.http.put('/profile/avatar', data)
+  }
+
   read(id: number): Promise<User> {
     return this.http.get(`/${id}`)
   }

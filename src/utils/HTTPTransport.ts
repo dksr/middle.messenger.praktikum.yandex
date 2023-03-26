@@ -1,15 +1,15 @@
-export enum METHODS {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  PATCH = 'PATCH',
-  DELETE = 'DELETE'
+export enum Method {
+  Get = 'Get',
+  Post = 'Post',
+  Put = 'Put',
+  Patch = 'Patch',
+  Delete = 'Delete'
 }
 
 type Options = {
-  method: METHODS,
-  data?: any,
-}
+  method: Method;
+  data?: any;
+};
 
 export default class HTTPTransport {
   static API_URL = 'https://ya-praktikum.tech/api/v2'
@@ -25,33 +25,33 @@ export default class HTTPTransport {
 
   public post<Response = void>(path: string, data?: unknown): Promise<Response> {
     return this.request<Response>(this.endpoint + path, {
-      method: METHODS.POST,
+      method: Method.Post,
       data,
     })
   }
 
   public put<Response = void>(path: string, data: unknown): Promise<Response> {
     return this.request<Response>(this.endpoint + path, {
-      method: METHODS.PUT,
+      method: Method.Put,
       data,
     })
   }
 
   public patch<Response = void>(path: string, data: unknown): Promise<Response> {
     return this.request<Response>(this.endpoint + path, {
-      method: METHODS.PATCH,
+      method: Method.Patch,
       data,
     })
   }
 
   public delete<Response>(path: string, data?: unknown): Promise<Response> {
     return this.request<Response>(this.endpoint + path, {
-      method: METHODS.DELETE,
+      method: Method.Delete,
       data,
     })
   }
 
-  private request<Response>(url: string, options: Options = { method: METHODS.GET }): Promise<Response> {
+  private request<Response>(url: string, options: Options = { method: Method.Get }): Promise<Response> {
     const { method, data } = options
 
     return new Promise((resolve, reject) => {
@@ -72,12 +72,14 @@ export default class HTTPTransport {
       xhr.onerror = () => reject({ reason: 'network error' })
       xhr.ontimeout = () => reject({ reason: 'timeout' })
 
-      xhr.setRequestHeader('Content-Type', 'application/json')
+      if (!(data instanceof FormData)) {
+        xhr.setRequestHeader('Content-Type', 'application/json')
+      }
 
       xhr.withCredentials = true
       xhr.responseType = 'json'
 
-      if (method === METHODS.GET || !data) {
+      if (method === Method.Get || !data) {
         xhr.send()
       } else {
         xhr.send(JSON.stringify(data))

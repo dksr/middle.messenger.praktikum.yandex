@@ -1,5 +1,6 @@
 import Block from '../../../core/Block'
 import template from './avatarForm.hbs'
+import UsersController from '../../../controllers/UsersController'
 
 interface IAvatarFormProps {
   events?: Record<string, (e: Event) => void>
@@ -32,7 +33,7 @@ export default class AvatarForm extends Block<IAvatarFormProps> {
     e.preventDefault()
     const file = ((e.target as HTMLFormElement)[0] as HTMLInputElement).files![0]
     if (file) {
-      console.log(file)
+      UsersController.updateUserAvatar(file)
     } else {
       console.error('Форма не валидна')
     }

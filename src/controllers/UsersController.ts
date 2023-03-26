@@ -18,10 +18,21 @@ class UsersController {
       console.error(e.reason)
     }
   }
+
   async updateUserPassword(data: Partial<User>) {
     try {
       await this.api.updateUserPassword(data)
       store.set('profileShow.editProfilePassword', false)
+    } catch (e: any) {
+      console.error(e.reason)
+    }
+  }
+
+  async updateUserAvatar(file: File) {
+    try {
+      const formData = new FormData()
+      formData.append('avatar', file)
+      await this.api.updateUserAvatar(formData)
     } catch (e: any) {
       console.error(e.reason)
     }
