@@ -7,8 +7,15 @@ import {
   emailValidator, firstNameValidator, isValidForm, loginValidator,
   phoneValidator, secondNameValidator,
 } from '../../../controllers/validators'
+import { withUser } from '../../../core/Store'
+import { User } from '../../../api/AuthAPI'
+import UsersController from '../../../controllers/UsersController'
 
-export default class ProfileForm extends Block {
+interface IProfileFormProps extends User {
+  events?: Record<string, (e: Event) => void>
+}
+
+class ProfileForm extends Block<IProfileFormProps> {
   init() {
     this.children = {
       EmailField: new FieldRow({
@@ -18,7 +25,7 @@ export default class ProfileForm extends Block {
         errorText: 'Неверный e-mail',
         type: 'text',
         class: 'field-value',
-        value: 'pochta@yandex.ru',
+        value: this.props.email,
         events: {
           blur: (e: Event) => emailValidator.bind(this)(e.target as HTMLInputElement),
         },
@@ -30,9 +37,9 @@ export default class ProfileForm extends Block {
         errorText: 'Логин от 3 до 20 символов, латиница, может содержать цифры, _ и -',
         type: 'text',
         class: 'field-value',
-        value: 'ivanivanov',
+        value: this.props.login,
         events: {
-          blur: (e: Event) => loginValidator.bind(this)(e.target as HTMLInputElement),
+          blur: (e: Event) => loginValidator.bind(this as any)(e.target as HTMLInputElement),
         },
       }),
       FirstNameField: new FieldRow({
@@ -42,7 +49,7 @@ export default class ProfileForm extends Block {
         errorText: 'Имя должно начинаться с большой буквы, без пробелов, цифр и спецсимволов',
         type: 'text',
         class: 'field-value',
-        value: 'Иван',
+        value: this.props.first_name,
         events: {
           blur: (e: Event) => firstNameValidator.bind(this)(e.target as HTMLInputElement),
         },
@@ -54,7 +61,7 @@ export default class ProfileForm extends Block {
         errorText: 'Фамилия должна начинаться с большой буквы, без пробелов, цифр и спецсимволов',
         type: 'text',
         class: 'field-value',
-        value: 'Иванов',
+        value: this.props.second_name,
         events: {
           blur: (e: Event) => secondNameValidator.bind(this)(e.target as HTMLInputElement),
         },
@@ -66,7 +73,7 @@ export default class ProfileForm extends Block {
         errorText: 'Имя в чате должно начинаться с большой буквы, без пробелов, цифр и спецсимволов',
         type: 'text',
         class: 'field-value',
-        value: 'Иван',
+        value: this.props.display_name,
         events: {
           blur: (e: Event) => chatNameValidator.bind(this)(e.target as HTMLInputElement),
         },
@@ -78,7 +85,7 @@ export default class ProfileForm extends Block {
         errorText: 'от 10 до 15 символов, состоит из цифр, может начинается с плюса',
         type: 'text',
         class: 'field-value',
-        value: '+74951234567',
+        value: this.props.phone,
         events: {
           blur: (e: Event) => phoneValidator.bind(this)(e.target as HTMLInputElement),
         },
@@ -102,13 +109,15 @@ export default class ProfileForm extends Block {
     const form = e.target as HTMLFormElement
     const data = isValidForm.bind(this)(form)
     if (data) {
-      console.log(data)
+      UsersController.updateUser(data)
     } else {
-      console.log('Форма не валидна')
+      console.error('Форма не валидна')
     }
   }
 
   render() {
-    return this.compile(template, {})
+    return this.compile(template, this.props)
   }
 }
+
+export default withUser(ProfileForm)

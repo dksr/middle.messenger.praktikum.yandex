@@ -14,6 +14,10 @@ interface State {
   chats: ChatInfo[];
   messages: Record<number, Message[]>;
   selectedChat?: number;
+  profileShow: {
+    editProfile: boolean,
+    editProfilePassword: boolean
+  }
 }
 
 class Store extends EventBus {
@@ -59,3 +63,4 @@ export function withStore<SP extends Record<string, any>>(mapStateToProps: (stat
 export default store
 
 export const withUser = withStore((state) => ({ ...state.user }))
+export const withProfileShow = withStore((state) => ({ ...state.profileShow }))

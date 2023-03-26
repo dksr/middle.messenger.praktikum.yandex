@@ -6,12 +6,11 @@ import ProfileTable from '../ProfileTable'
 import Link from '../../ui/Link'
 import ProfileForm from '../ProfileForm'
 import ProfilePasswordForm from '../ProfilePasswordForm'
-import Router from '../../../utils/Router'
-import { withUser } from '../../../core/Store'
-import { Routes } from '../../../index'
+import store, { withProfileShow, withUser } from '../../../core/Store'
 import { User } from '../../../api/AuthAPI'
+import AuthController from '../../../controllers/AuthController'
 
-interface IProfileProps extends User{
+interface IProfileProps extends User {
   editProfile: boolean,
   editProfilePassword: boolean,
 }
@@ -26,8 +25,8 @@ class Profile extends Block<IProfileProps> {
         },
       }),
       ProfileHeading: new Heading({
-        label: this.props.first_name,
         class: 'profile-content__title',
+        label: this.props.first_name,
       }),
       ProfileTable: new ProfileTable({}),
       ProfileEditLink: new Link({
@@ -35,9 +34,7 @@ class Profile extends Block<IProfileProps> {
         class: 'profile-content__link',
         events: {
           click: () => {
-            this.setProps({
-              editProfile: true,
-            })
+            store.set('profileShow.editProfile', true)
           },
         },
       }),
@@ -46,9 +43,7 @@ class Profile extends Block<IProfileProps> {
         class: 'profile-content__link',
         events: {
           click: () => {
-            this.setProps({
-              editProfilePassword: true,
-            })
+            store.set('profileShow.editProfilePassword', true)
           },
         },
       }),
@@ -56,7 +51,7 @@ class Profile extends Block<IProfileProps> {
         label: 'Выйти',
         class: 'profile-content__link profile-content__link_red',
         events: {
-          click: () => Router.go(Routes.Home),
+          click: () => AuthController.logout(),
         },
       }),
       ProfileForm: new ProfileForm({}),
@@ -66,11 +61,6 @@ class Profile extends Block<IProfileProps> {
 
   private _showAvatarModal(event: Event) {
     const { id } = event.target as HTMLElement
-    if (id === 'modalEditAvatar') {
-      this.children.ProfileAvatar.setProps({
-        showEditAvatarModal: false,
-      })
-    }
     if (id === 'modalAvatarOpen') {
       this.children.ProfileAvatar.setProps({
         showEditAvatarModal: true,
@@ -84,4 +74,4 @@ class Profile extends Block<IProfileProps> {
 }
 
 // @ts-ignore
-export default withUser(Profile)
+export default withUser(withProfileShow(Profile))

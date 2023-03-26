@@ -21,7 +21,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use(Routes.Profile, ProfilePage)
     .use(Routes.Chats, ChatsPage)
     .use(Routes.Error, ErrorPage)
-    .start()
 
   let isAuthPages = false
 
@@ -31,10 +30,13 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   try {
     await AuthController.fetchUser()
+    Router.start()
+
     if (isAuthPages) {
       Router.go(Routes.Chats)
     }
   } catch (e) {
+    Router.start()
     if (!isAuthPages) {
       Router.go(Routes.Home)
     }

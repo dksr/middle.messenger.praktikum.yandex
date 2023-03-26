@@ -1,6 +1,4 @@
-import AuthForm from '../components/business/AuthForm'
-
-type FormComponent = AuthForm
+import Block from '../core/Block'
 
 function _hasError(element: HTMLInputElement, regex: RegExp) {
   const str = element.value
@@ -11,7 +9,7 @@ function _hasError(element: HTMLInputElement, regex: RegExp) {
   return error
 }
 
-export function loginValidator(this: FormComponent, element: HTMLInputElement) {
+export function loginValidator(this: Block, element: HTMLInputElement) {
   const regex = /^(?!^-+$)(?!^_+$)(?!^\d+$)[a-zA-Z0-9_-]{3,20}$/
   const error = _hasError(element, regex)
 
@@ -22,7 +20,7 @@ export function loginValidator(this: FormComponent, element: HTMLInputElement) {
   return !error
 }
 
-export function passwordValidator(this: FormComponent, element: HTMLInputElement) {
+export function passwordValidator(this: Block, element: HTMLInputElement) {
   const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/
   const error = _hasError(element, regex)
 
@@ -31,7 +29,7 @@ export function passwordValidator(this: FormComponent, element: HTMLInputElement
   })
   return !error
 }
-export function oldPasswordValidator(this: FormComponent, element: HTMLInputElement) {
+export function oldPasswordValidator(this: Block, element: HTMLInputElement) {
   const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/
   const error = _hasError(element, regex)
 
@@ -41,7 +39,7 @@ export function oldPasswordValidator(this: FormComponent, element: HTMLInputElem
   return !error
 }
 
-export function passwordConfirmValidator(this: FormComponent, element: HTMLInputElement) {
+export function passwordConfirmValidator(this: Block, element: HTMLInputElement) {
   const error = (this.children.PasswordField.children.Input.element as HTMLInputElement).value
     !== element.value
 
@@ -51,7 +49,7 @@ export function passwordConfirmValidator(this: FormComponent, element: HTMLInput
   return !error
 }
 
-export function emailValidator(this: FormComponent, element: HTMLInputElement) {
+export function emailValidator(this: Block, element: HTMLInputElement) {
   const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   const error = _hasError(element, regex)
 
@@ -61,7 +59,7 @@ export function emailValidator(this: FormComponent, element: HTMLInputElement) {
   return !error
 }
 
-export function firstNameValidator(this: FormComponent, element: HTMLInputElement) {
+export function firstNameValidator(this: Block, element: HTMLInputElement) {
   const regex = /^[A-ZА-ЯЁ][a-zа-яё-]*$/
   const error = _hasError(element, regex)
 
@@ -71,7 +69,7 @@ export function firstNameValidator(this: FormComponent, element: HTMLInputElemen
   return !error
 }
 
-export function secondNameValidator(this: FormComponent, element: HTMLInputElement) {
+export function secondNameValidator(this: Block, element: HTMLInputElement) {
   const regex = /^[A-ZА-ЯЁ][a-zа-яё-]*$/
   const error = _hasError(element, regex)
 
@@ -80,8 +78,8 @@ export function secondNameValidator(this: FormComponent, element: HTMLInputEleme
   })
   return !error
 }
-export function chatNameValidator(this: FormComponent, element: HTMLInputElement) {
-  const regex = /^[A-ZА-ЯЁ][a-zа-яё-]*$/
+export function chatNameValidator(this: Block, element: HTMLInputElement) {
+  const regex = /^[А-ЯA-Z][А-Яа-яA-Za-z]*$/
   const error = _hasError(element, regex)
 
   this.children.ChatNameField.setProps({
@@ -89,7 +87,7 @@ export function chatNameValidator(this: FormComponent, element: HTMLInputElement
   })
   return !error
 }
-export function phoneValidator(this: FormComponent, element: HTMLInputElement) {
+export function phoneValidator(this: Block, element: HTMLInputElement) {
   const regex = /^\+?\d{10,15}$/
   const error = _hasError(element, regex)
 
@@ -98,7 +96,7 @@ export function phoneValidator(this: FormComponent, element: HTMLInputElement) {
   })
   return !error
 }
-export function messageValidator(this: FormComponent, element: HTMLInputElement) {
+export function messageValidator(this: Block, element: HTMLInputElement) {
   const regex = /^\S+$/
   const error = _hasError(element, regex)
 
@@ -108,7 +106,7 @@ export function messageValidator(this: FormComponent, element: HTMLInputElement)
   return !error
 }
 
-export function isValidForm(this: FormComponent, form: HTMLFormElement) {
+export function isValidForm(this: Block, form: HTMLFormElement) {
   let valid = true
   const data: Record<string, string> = {}
 
@@ -119,13 +117,13 @@ export function isValidForm(this: FormComponent, form: HTMLFormElement) {
         data[input.name] = input.value
       }
     }
-    if (input.name === 'password') {
+    if (input.name === 'password' || input.name === 'newPassword') {
       valid = passwordValidator.bind(this)(input) && valid
       if (valid) {
         data[input.name] = input.value
       }
     }
-    if (input.name === 'old_password') {
+    if (input.name === 'oldPassword') {
       valid = oldPasswordValidator.bind(this)(input) && valid
       if (valid) {
         data[input.name] = input.value

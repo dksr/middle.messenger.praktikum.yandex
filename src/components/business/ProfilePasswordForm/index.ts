@@ -8,30 +8,31 @@ import {
 } from '../../../controllers/validators'
 import Button from '../../ui/Button'
 import FieldRow from '../../ui/FieldRow'
+import UsersController from '../../../controllers/UsersController'
 
 export default class ProfilePasswordForm extends Block {
   init() {
     this.children = {
       OldPasswordField: new FieldRow({
         label: 'Старый пароль',
-        name: 'old_password',
+        name: 'oldPassword',
         hasError: false,
         errorText: 'Пароль неверный',
         type: 'password',
         class: 'field-value',
-        value: '111111111bbbBBB',
+        placeholder: 'Введите старый пароль',
         events: {
           blur: (e: Event) => oldPasswordValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
       PasswordField: new FieldRow({
         label: 'Новый пароль',
-        name: 'password',
+        name: 'newPassword',
         hasError: false,
         errorText: 'от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра',
         type: 'password',
         class: 'field-value',
-        value: '11111111aaaAAA',
+        placeholder: 'Введите новый пароль',
         events: {
           blur: (e: Event) => passwordValidator.bind(this)(e.target as HTMLInputElement),
         },
@@ -44,7 +45,7 @@ export default class ProfilePasswordForm extends Block {
         name: 'password_confirm',
         type: 'password',
         class: 'field-value',
-        value: '11111111aaaAAA',
+        placeholder: 'Повторите новый пароль',
         events: {
           blur: (e: Event) => passwordConfirmValidator.bind(this)(e.target as HTMLInputElement),
         },
@@ -67,7 +68,7 @@ export default class ProfilePasswordForm extends Block {
     const form = e.target as HTMLFormElement
     const data = isValidForm.bind(this)(form)
     if (data) {
-      console.log(data)
+      UsersController.updateUserPassword(data)
     } else {
       console.log('Форма не валидна')
     }
