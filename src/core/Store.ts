@@ -65,3 +65,5 @@ export default store
 
 export const withUser = withStore((state) => ({ ...state.user }))
 export const withProfileShow = withStore((state) => ({ ...state.profileShow }))
+export const withChats = withStore((state) => ({ chats: [...(state.chats || [])] }))
+export const withSelectedChat = withStore((state) => ({ selectedChat: (state.chats || []).find(({ id }) => id === state.selectedChat) }))

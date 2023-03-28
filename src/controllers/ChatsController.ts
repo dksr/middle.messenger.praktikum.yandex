@@ -1,6 +1,8 @@
 import API, { ChatsAPI } from '../api/ChatsAPI'
 import MessagesController from './MessagesController'
 import store from '../core/Store'
+import { formatDate } from '../utils/helpers'
+import chatImg from '../../static/chat-img.png'
 
 class ChatsController {
   private readonly api: ChatsAPI
@@ -19,6 +21,13 @@ class ChatsController {
     const chats = await this.api.read()
 
     chats.map(async (chat) => {
+      if (chat.last_message && chat.last_message.time) {
+        chat.last_message.time = formatDate(chat.last_message.time)
+      }
+      if (chat.avatar === null) {
+        chat.avatar = chatImg
+      }
+      console.log(chat)
       const token = await this.getToken(chat.id)
 
       await MessagesController.connect(chat.id, token)

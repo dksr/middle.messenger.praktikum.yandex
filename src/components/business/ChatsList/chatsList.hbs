@@ -1,17 +1,9 @@
 <ul class="chats-list">
+{{#if isLoaded}}
   {{#each chats}}
-    <li class="chats-list__item">
-      <img src="{{this.img}}" alt="Chat empty img">
-      <div class="group-left">
-        <h3>{{this.title}}</h3>
-        <p>{{{this.text}}}</p>
-      </div>
-      <div class="group-right">
-        <div class="date-time">{{this.dateTime}}</div>
-        {{#if unread}}
-        <div class="unread-count">{{this.unread}}</div>
-        {{/if}}
-      </div>
-    </li>
+    {{{this}}}
   {{/each}}
+{{else}}
+  <li style="text-align: center">Loading...</li>
+{{/if}}
 </ul>

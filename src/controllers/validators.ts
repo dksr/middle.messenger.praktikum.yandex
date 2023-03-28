@@ -11,9 +11,9 @@ function _hasError(element: HTMLInputElement, regex: RegExp) {
 
 export function loginValidator(this: Block, element: HTMLInputElement) {
   const regex = /^(?!^-+$)(?!^_+$)(?!^\d+$)[a-zA-Z0-9_-]{3,20}$/
-  const error = _hasError(element, regex)
+  const error = _hasError(element, regex);
 
-  this.children.LoginField.setProps({
+  (this.children.LoginField as Block).setProps({
     hasError: error,
   })
 
@@ -22,28 +22,28 @@ export function loginValidator(this: Block, element: HTMLInputElement) {
 
 export function passwordValidator(this: Block, element: HTMLInputElement) {
   const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/
-  const error = _hasError(element, regex)
+  const error = _hasError(element, regex);
 
-  this.children.PasswordField.setProps({
+  (this.children.PasswordField as Block).setProps({
     hasError: error,
   })
   return !error
 }
 export function oldPasswordValidator(this: Block, element: HTMLInputElement) {
   const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/
-  const error = _hasError(element, regex)
+  const error = _hasError(element, regex);
 
-  this.children.OldPasswordField.setProps({
+  (this.children.OldPasswordField as Block).setProps({
     hasError: error,
   })
   return !error
 }
 
 export function passwordConfirmValidator(this: Block, element: HTMLInputElement) {
-  const error = (this.children.PasswordField.children.Input.element as HTMLInputElement).value
-    !== element.value
+  const error = (((this.children.PasswordField as Block).children.Input as Block).element as HTMLInputElement).value
+    !== element.value;
 
-  this.children.PasswordConfirmField.setProps({
+  (this.children.PasswordConfirmField as Block).setProps({
     hasError: error,
   })
   return !error
@@ -51,9 +51,9 @@ export function passwordConfirmValidator(this: Block, element: HTMLInputElement)
 
 export function emailValidator(this: Block, element: HTMLInputElement) {
   const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-  const error = _hasError(element, regex)
+  const error = _hasError(element, regex);
 
-  this.children.EmailField.setProps({
+  (this.children.EmailField as Block).setProps({
     hasError: error,
   })
   return !error
@@ -61,9 +61,9 @@ export function emailValidator(this: Block, element: HTMLInputElement) {
 
 export function firstNameValidator(this: Block, element: HTMLInputElement) {
   const regex = /^[A-ZА-ЯЁ][a-zа-яё-]*$/
-  const error = _hasError(element, regex)
+  const error = _hasError(element, regex);
 
-  this.children.FirstNameField.setProps({
+  (this.children.FirstNameField as Block).setProps({
     hasError: error,
   })
   return !error
@@ -71,36 +71,36 @@ export function firstNameValidator(this: Block, element: HTMLInputElement) {
 
 export function secondNameValidator(this: Block, element: HTMLInputElement) {
   const regex = /^[A-ZА-ЯЁ][a-zа-яё-]*$/
-  const error = _hasError(element, regex)
+  const error = _hasError(element, regex);
 
-  this.children.SecondNameField.setProps({
+  (this.children.SecondNameField as Block).setProps({
     hasError: error,
   })
   return !error
 }
 export function chatNameValidator(this: Block, element: HTMLInputElement) {
   const regex = /^[А-ЯA-Z][А-Яа-яA-Za-z]*$/
-  const error = _hasError(element, regex)
+  const error = _hasError(element, regex);
 
-  this.children.ChatNameField.setProps({
+  (this.children.ChatNameField as Block).setProps({
     hasError: error,
   })
   return !error
 }
 export function phoneValidator(this: Block, element: HTMLInputElement) {
   const regex = /^\+?\d{10,15}$/
-  const error = _hasError(element, regex)
+  const error = _hasError(element, regex);
 
-  this.children.PhoneField.setProps({
+  (this.children.PhoneField as Block).setProps({
     hasError: error,
   })
   return !error
 }
 export function messageValidator(this: Block, element: HTMLInputElement) {
   const regex = /^\S+$/
-  const error = _hasError(element, regex)
+  const error = _hasError(element, regex);
 
-  this.children.FieldMessage.setProps({
+  (this.children.FieldMessage as Block).setProps({
     hasError: error,
   })
   return !error

@@ -1,5 +1,5 @@
 <div class="chats-content__main">
-  {{#if showChat}}
+  {{#if selectedChat}}
     <div class="chat">
       <div class="chat__header">
         <img class="avatar" src="{{chatImg}}" alt="chat img">
@@ -48,8 +48,7 @@
         {{{ChatForm}}}
       </div>
     </div>
-  {{/if}}
-  {{#unless showChat}}
+  {{else}}
     <p class="chats-empty">Выберите чат, чтобы отправить сообщение</p>
-  {{/unless}}
+  {{/if}}
 </div>

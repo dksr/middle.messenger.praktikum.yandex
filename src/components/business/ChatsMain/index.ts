@@ -7,13 +7,16 @@ import messageImg from '../../../../static/message-img.jpg'
 import Link from '../../ui/Link'
 import Tag from '../../ui/Tag'
 import ChatForm from '../ChatForm'
+import { withSelectedChat } from '../../../core/Store'
+import { ChatInfo } from '../../../api/ChatsAPI'
 
 interface IChatsMainProps {
-  showChatModal: boolean,
-  showChat: boolean
+  selectedChat: ChatInfo,
+  showChatModal?: boolean,
+  showChat?: boolean
 }
 
-export default class ChatsMain extends Block<IChatsMainProps> {
+class ChatsMain extends Block<IChatsMainProps> {
   init() {
     this.children = {
       LinkSettings: new Link({
@@ -44,3 +47,5 @@ export default class ChatsMain extends Block<IChatsMainProps> {
     })
   }
 }
+
+export default withSelectedChat(ChatsMain)

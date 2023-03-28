@@ -3,8 +3,9 @@ import template from './chatsSidebar.hbs'
 import Link from '../../ui/Link'
 import Input from '../../ui/Input'
 import ChatsList from '../ChatsList'
-import chatImg from '../../../../static/chat-img.png'
 import Router from '../../../utils/Router'
+import ChatsController from '../../../controllers/ChatsController'
+import { Routes } from '../../../index'
 
 export default class ChatsSidebar extends Block {
   init() {
@@ -13,7 +14,7 @@ export default class ChatsSidebar extends Block {
         label: 'Профиль',
         class: 'profile-link',
         events: {
-          click: () => Router.go('/settings'),
+          click: () => Router.go(Routes.Profile),
         },
       }),
       InputSearch: new Input({
@@ -24,99 +25,14 @@ export default class ChatsSidebar extends Block {
         },
       }),
       ChatsList: new ChatsList({
-        chats: [
-          {
-            title: 'Андрей',
-            text: 'Изображение',
-            dateTime: '10:49',
-            unread: 2,
-            img: chatImg,
-          },
-          {
-            title: 'Киноклуб',
-            text: '<b>Вы:</b> стикер',
-            dateTime: '12:00',
-            unread: 0,
-            img: chatImg,
-          },
-          {
-            title: 'Илья',
-            text: 'Друзья, у меня для вас особенный выпуск новостей!...',
-            dateTime: '15:12',
-            unread: 4,
-            img: chatImg,
-          },
-          {
-            title: 'Андрей',
-            text: 'Изображение',
-            dateTime: '10:49',
-            unread: 2,
-            img: chatImg,
-          },
-          {
-            title: 'Киноклуб',
-            text: '<b>Вы:</b> стикер',
-            dateTime: '12:00',
-            unread: 0,
-            img: chatImg,
-          },
-          {
-            title: 'Илья',
-            text: 'Друзья, у меня для вас особенный выпуск новостей!...',
-            dateTime: '15:12',
-            unread: 4,
-            img: chatImg,
-          },
-          {
-            title: 'Андрей',
-            text: 'Изображение',
-            dateTime: '10:49',
-            unread: 2,
-            img: chatImg,
-          },
-          {
-            title: 'Киноклуб',
-            text: '<b>Вы:</b> стикер',
-            dateTime: '12:00',
-            unread: 0,
-            img: chatImg,
-          },
-          {
-            title: 'Илья',
-            text: 'Друзья, у меня для вас особенный выпуск новостей!...',
-            dateTime: '15:12',
-            unread: 4,
-            img: chatImg,
-          },
-          {
-            title: 'Андрей',
-            text: 'Изображение',
-            dateTime: '10:49',
-            unread: 2,
-            img: chatImg,
-          },
-          {
-            title: 'Киноклуб',
-            text: '<b>Вы:</b> стикер',
-            dateTime: '12:00',
-            unread: 0,
-            img: chatImg,
-          },
-          {
-            title: 'Илья',
-            text: 'Друзья, у меня для вас особенный выпуск новостей!...',
-            dateTime: '15:12',
-            unread: 4,
-            img: chatImg,
-          },
-        ],
-        events: {
-          click: () => {
-            this.props.showChat(true)
-          },
-        },
+        isLoaded: false,
       }),
     }
+    ChatsController.fetchChats().finally(() => {
+      (this.children.ChatsList as Block).setProps({
+        isLoaded: true,
+      })
+    })
   }
 
   render() {
