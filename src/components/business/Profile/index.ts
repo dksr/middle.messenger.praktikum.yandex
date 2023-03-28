@@ -19,7 +19,8 @@ class Profile extends Block<IProfileProps> {
   init() {
     this.children = {
       ProfileAvatar: new ProfileAvatar({
-        showEditAvatarModal: false,
+        // @ts-ignore
+        editProfileAvatarModal: false,
         events: {
           click: this._showAvatarModal.bind(this),
         },
@@ -62,9 +63,7 @@ class Profile extends Block<IProfileProps> {
   private _showAvatarModal(event: Event) {
     const { id } = event.target as HTMLElement
     if (id === 'modalAvatarOpen') {
-      this.children.ProfileAvatar.setProps({
-        showEditAvatarModal: true,
-      })
+      store.set('profileShow.editProfileAvatarModal', true)
     }
   }
 
@@ -74,4 +73,4 @@ class Profile extends Block<IProfileProps> {
 }
 
 // @ts-ignore
-export default withUser(withProfileShow(Profile))
+export default withProfileShow(withUser(Profile))

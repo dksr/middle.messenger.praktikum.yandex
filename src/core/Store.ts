@@ -16,7 +16,8 @@ interface State {
   selectedChat?: number;
   profileShow: {
     editProfile: boolean,
-    editProfilePassword: boolean
+    editProfilePassword: boolean,
+    editProfileAvatarModal: boolean
   }
 }
 

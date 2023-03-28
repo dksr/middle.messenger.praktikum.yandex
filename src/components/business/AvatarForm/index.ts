@@ -35,7 +35,7 @@ export default class AvatarForm extends Block<IAvatarFormProps> {
     if (file) {
       UsersController.updateUserAvatar(file)
     } else {
-      console.error('Форма не валидна')
+      console.error('Загрузите файл картинки')
     }
   }
 

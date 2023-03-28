@@ -32,7 +32,9 @@ class UsersController {
     try {
       const formData = new FormData()
       formData.append('avatar', file)
-      await this.api.updateUserAvatar(formData)
+      const newUser = await this.api.updateUserAvatar(formData)
+      store.set('user', newUser)
+      store.set('profileShow.editProfileAvatarModal', false)
     } catch (e: any) {
       console.error(e.reason)
     }

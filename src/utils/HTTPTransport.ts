@@ -11,6 +11,8 @@ type Options = {
   data?: any;
 };
 
+export const RESOURCES = 'https://ya-praktikum.tech/api/v2/resources'
+
 export default class HTTPTransport {
   static API_URL = 'https://ya-praktikum.tech/api/v2'
   protected endpoint: string
@@ -72,8 +74,11 @@ export default class HTTPTransport {
       xhr.onerror = () => reject({ reason: 'network error' })
       xhr.ontimeout = () => reject({ reason: 'timeout' })
 
+      let sendData = data
+
       if (!(data instanceof FormData)) {
         xhr.setRequestHeader('Content-Type', 'application/json')
+        sendData = JSON.stringify(data)
       }
 
       xhr.withCredentials = true
@@ -82,7 +87,7 @@ export default class HTTPTransport {
       if (method === Method.Get || !data) {
         xhr.send()
       } else {
-        xhr.send(JSON.stringify(data))
+        xhr.send(sendData)
       }
     })
   }
