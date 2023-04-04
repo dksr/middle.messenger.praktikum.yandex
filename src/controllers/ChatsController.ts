@@ -27,7 +27,6 @@ class ChatsController {
       if (chat.avatar === null) {
         chat.avatar = chatImg
       }
-      console.log(chat)
       const token = await this.getToken(chat.id)
 
       await MessagesController.connect(chat.id, token)

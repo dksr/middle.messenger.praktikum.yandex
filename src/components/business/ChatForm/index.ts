@@ -5,8 +5,10 @@ import btnMessageSubmit from '../../../../static/btn-message-submit.svg'
 import Button from '../../ui/Button'
 import FieldMessage from '../../ui/FieldMessage'
 import { isValidForm, messageValidator } from '../../../controllers/validators'
+import messagesController from '../../../controllers/MessagesController'
+import { withSelectedChat } from '../../../core/Store'
 
-export default class ChatForm extends Block {
+class ChatForm extends Block {
   init() {
     this.children = {
       FieldMessage: new FieldMessage({
@@ -36,7 +38,10 @@ export default class ChatForm extends Block {
     const form = e.target as HTMLFormElement
     const data = isValidForm.bind(this)(form)
     if (data) {
-      console.log(data)
+      const { message } = data;
+      (((this.children.FieldMessage as Block).children.Input as Block)
+        .getContent() as HTMLInputElement).value = ''
+      messagesController.sendMessage(this.props.selectedChat.id, message)
     } else {
       console.log('Форма не валидна')
     }
@@ -46,3 +51,5 @@ export default class ChatForm extends Block {
     return this.compile(template, { ...this.props, attachImg })
   }
 }
+
+export default withSelectedChat(ChatForm)

@@ -2,18 +2,16 @@ import Block from '../../../core/Block'
 import template from './chatsMain.hbs'
 import chatImg from '../../../../static/chat-img.png'
 import btnSettings from '../../../../static/btn-setting.svg'
-import readStatus from '../../../../static/read-status.svg'
-import messageImg from '../../../../static/message-img.jpg'
 import Link from '../../ui/Link'
 import Tag from '../../ui/Tag'
 import ChatForm from '../ChatForm'
 import { withSelectedChat } from '../../../core/Store'
 import { ChatInfo } from '../../../api/ChatsAPI'
+import ChatMessages from '../ChatMessages'
 
 interface IChatsMainProps {
   selectedChat: ChatInfo,
   showChatModal?: boolean,
-  showChat?: boolean
 }
 
 class ChatsMain extends Block<IChatsMainProps> {
@@ -33,6 +31,7 @@ class ChatsMain extends Block<IChatsMainProps> {
           click: () => this.setProps({ showChatModal: false }),
         },
       }),
+      ChatMessages: new ChatMessages({}),
       ChatForm: new ChatForm({}),
     }
   }
@@ -42,8 +41,6 @@ class ChatsMain extends Block<IChatsMainProps> {
       ...this.props,
       chatImg,
       btnSettings,
-      readStatus,
-      messageImg,
     })
   }
 }

@@ -97,7 +97,7 @@ export function phoneValidator(this: Block, element: HTMLInputElement) {
   return !error
 }
 export function messageValidator(this: Block, element: HTMLInputElement) {
-  const regex = /^\S+$/
+  const regex = /^(?!\s*$).+/
   const error = _hasError(element, regex);
 
   (this.children.FieldMessage as Block).setProps({

@@ -3,7 +3,7 @@ import EventBus from './EventBus'
 import Block from './Block'
 import { User } from '../api/AuthAPI'
 import { ChatInfo } from '../api/ChatsAPI'
-import { Message } from '../controllers/MessagesController'
+import { IMessage } from '../controllers/MessagesController'
 
 export enum StoreEvents {
   Updated = 'updated'
@@ -12,7 +12,7 @@ export enum StoreEvents {
 interface State {
   user: User;
   chats: ChatInfo[];
-  messages: Record<number, Message[]>;
+  messages: Record<number, IMessage[]>;
   selectedChat?: number;
   profileShow: {
     editProfile: boolean,
@@ -67,3 +67,20 @@ export const withUser = withStore((state) => ({ ...state.user }))
 export const withProfileShow = withStore((state) => ({ ...state.profileShow }))
 export const withChats = withStore((state) => ({ chats: [...(state.chats || [])] }))
 export const withSelectedChat = withStore((state) => ({ selectedChat: (state.chats || []).find(({ id }) => id === state.selectedChat) }))
+export const withSelectedChatMessages = withStore((state) => {
+  const selectedChatId = state.selectedChat
+
+  if (!selectedChatId) {
+    return {
+      messages: [],
+      selectedChat: undefined,
+      userId: state.user.id,
+    }
+  }
+
+  return {
+    messages: (state.messages || {})[selectedChatId] || [],
+    selectedChat: state.selectedChat,
+    userId: state.user.id,
+  }
+})

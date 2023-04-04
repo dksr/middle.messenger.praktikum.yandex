@@ -64,7 +64,7 @@ export function formatDate(dateString: string) {
     && date.getFullYear() === now.getFullYear()
 
   const day = isToday ? '' : `${date.getDate()} `
-  const month = getMonthName(date.getMonth())
+  const month = isToday ? '' : getMonthName(date.getMonth())
   const time = `${date.getHours()}:${(`0${date.getMinutes()}`).slice(-2)}`
 
   return `${day}${month} ${time}`
