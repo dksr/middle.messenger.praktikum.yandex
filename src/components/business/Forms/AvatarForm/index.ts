@@ -1,6 +1,6 @@
-import Block from '../../../core/Block'
+import Block from '../../../../core/Block'
 import template from './avatarForm.hbs'
-import UsersController from '../../../controllers/UsersController'
+import UsersController from '../../../../controllers/UsersController'
 
 interface IAvatarFormProps {
   events?: Record<string, (e: Event) => void>

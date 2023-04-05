@@ -1,14 +1,14 @@
-import Block from '../../../core/Block'
+import Block from '../../../../core/Block'
 import template from './profilePasswordForm.hbs'
 import {
   isValidForm,
   oldPasswordValidator,
   passwordConfirmValidator,
   passwordValidator,
-} from '../../../controllers/validators'
-import Button from '../../ui/Button'
-import FieldRow from '../../ui/FieldRow'
-import UsersController from '../../../controllers/UsersController'
+} from '../../../../controllers/validators'
+import Button from '../../../ui/Button'
+import FieldRow from '../../../ui/FieldRow'
+import UsersController from '../../../../controllers/UsersController'
 
 export default class ProfilePasswordForm extends Block {
   init() {

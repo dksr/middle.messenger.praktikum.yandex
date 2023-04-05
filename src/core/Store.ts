@@ -18,7 +18,10 @@ interface State {
     editProfile: boolean,
     editProfilePassword: boolean,
     editProfileAvatarModal: boolean
-  }
+  },
+  showModalAddChat: boolean,
+  showModalAddChatUser: boolean,
+  showModalDeleteChatUser: boolean,
 }
 
 class Store extends EventBus {
@@ -84,3 +87,4 @@ export const withSelectedChatMessages = withStore((state) => {
     userId: state.user.id,
   }
 })
+export const withShowModalAddChat = withStore((state) => ({ showModalAddChat: state.showModalAddChat }))

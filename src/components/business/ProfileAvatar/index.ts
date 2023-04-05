@@ -1,7 +1,7 @@
 import Block from '../../../core/Block'
 import template from './profileAvatar.hbs'
 import Link from '../../ui/Link'
-import ModalAvatar from '../ModalAvatar'
+import ModalAvatar from '../Modals/ModalAvatar'
 import avatarImg from '../../../../static/no-avatar.png'
 import { withProfileShow, withUser } from '../../../core/Store'
 import { User } from '../../../api/AuthAPI'

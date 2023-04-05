@@ -1,12 +1,12 @@
-import Block from '../../../core/Block'
+import Block from '../../../../core/Block'
 import template from './chatForm.hbs'
-import attachImg from '../../../../static/attach.svg'
-import btnMessageSubmit from '../../../../static/btn-message-submit.svg'
-import Button from '../../ui/Button'
-import FieldMessage from '../../ui/FieldMessage'
-import { isValidForm, messageValidator } from '../../../controllers/validators'
-import messagesController from '../../../controllers/MessagesController'
-import { withSelectedChat } from '../../../core/Store'
+import attachImg from '../../../../../static/attach.svg'
+import btnMessageSubmit from '../../../../../static/btn-message-submit.svg'
+import Button from '../../../ui/Button'
+import FieldMessage from '../../../ui/FieldMessage'
+import { isValidForm, messageValidator } from '../../../../controllers/validators'
+import messagesController from '../../../../controllers/MessagesController'
+import { withSelectedChat } from '../../../../core/Store'
 
 class ChatForm extends Block {
   init() {

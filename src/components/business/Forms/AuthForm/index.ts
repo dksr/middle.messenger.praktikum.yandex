@@ -1,13 +1,13 @@
-import Block from '../../../core/Block'
+import Block from '../../../../core/Block'
 import template from './authForm.hbs'
-import Field from '../../ui/Field'
-import Button from '../../ui/Button'
-import Link from '../../ui/Link'
-import { isValidForm, loginValidator, passwordValidator } from '../../../controllers/validators'
-import Router from '../../../utils/Router'
-import AuthController from '../../../controllers/AuthController'
-import { SigninData } from '../../../api/AuthAPI'
-import { Routes } from '../../../index'
+import Field from '../../../ui/Field'
+import Button from '../../../ui/Button'
+import Link from '../../../ui/Link'
+import { isValidForm, loginValidator, passwordValidator } from '../../../../controllers/validators'
+import Router from '../../../../utils/Router'
+import AuthController from '../../../../controllers/AuthController'
+import { SigninData } from '../../../../api/AuthAPI'
+import { Routes } from '../../../../index'
 
 interface IAuthFormProps {
   events?: Record<string, (e: Event) => void>

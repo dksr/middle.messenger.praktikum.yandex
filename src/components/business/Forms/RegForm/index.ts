@@ -1,16 +1,16 @@
-import Block from '../../../core/Block'
+import Block from '../../../../core/Block'
 import template from './regForm.hbs'
-import Field from '../../ui/Field'
-import Button from '../../ui/Button'
-import Link from '../../ui/Link'
+import Field from '../../../ui/Field'
+import Button from '../../../ui/Button'
+import Link from '../../../ui/Link'
 import {
   emailValidator, firstNameValidator, secondNameValidator, isValidForm,
   loginValidator, phoneValidator, passwordValidator, passwordConfirmValidator,
-} from '../../../controllers/validators'
-import Router from '../../../utils/Router'
-import AuthController from '../../../controllers/AuthController'
-import { SignupData } from '../../../api/AuthAPI'
-import { Routes } from '../../../index'
+} from '../../../../controllers/validators'
+import Router from '../../../../utils/Router'
+import AuthController from '../../../../controllers/AuthController'
+import { SignupData } from '../../../../api/AuthAPI'
+import { Routes } from '../../../../index'
 
 export default class RegForm extends Block {
   init() {

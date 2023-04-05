@@ -15,6 +15,7 @@ class ChatsController {
     await this.api.create(title)
 
     this.fetchChats()
+    store.set('showModalAddChat', false)
   }
 
   async fetchChats() {

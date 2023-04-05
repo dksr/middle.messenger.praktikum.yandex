@@ -6,8 +6,11 @@ import ChatsList from '../ChatsList'
 import Router from '../../../utils/Router'
 import ChatsController from '../../../controllers/ChatsController'
 import { Routes } from '../../../index'
+import Button from '../../ui/Button'
+import ModalAddChat from '../Modals/ModalAddChat'
+import store, { withShowModalAddChat } from '../../../core/Store'
 
-export default class ChatsSidebar extends Block {
+class ChatsSidebar extends Block {
   init() {
     this.children = {
       LinkProfile: new Link({
@@ -24,6 +27,14 @@ export default class ChatsSidebar extends Block {
           keyup: (event: Event) => console.log((event.target as HTMLInputElement).value),
         },
       }),
+      AddChatButton: new Button({
+        label: 'Добавить чат',
+        class: 'add-chat',
+        events: {
+          click: () => store.set('showModalAddChat', true),
+        },
+      }),
+      ModalAddChat: new ModalAddChat({}),
       ChatsList: new ChatsList({
         isLoaded: false,
       }),
@@ -36,6 +47,8 @@ export default class ChatsSidebar extends Block {
   }
 
   render() {
-    return this.compile(template, {})
+    return this.compile(template, this.props)
   }
 }
+
+export default withShowModalAddChat(ChatsSidebar)

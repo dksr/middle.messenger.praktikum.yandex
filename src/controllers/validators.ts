@@ -145,7 +145,7 @@ export function isValidForm(this: Block, form: HTMLFormElement) {
         data[input.name] = input.value
       }
     }
-    if (input.name === 'message') {
+    if (input.name === 'message' || input.name === 'chat_name') {
       valid = messageValidator.bind(this)(input) && valid
       if (valid) {
         data[input.name] = input.value

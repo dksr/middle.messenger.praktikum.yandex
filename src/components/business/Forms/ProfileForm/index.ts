@@ -1,15 +1,15 @@
-import Block from '../../../core/Block'
+import Block from '../../../../core/Block'
 import template from './profileForm.hbs'
-import FieldRow from '../../ui/FieldRow'
-import Button from '../../ui/Button'
+import FieldRow from '../../../ui/FieldRow'
+import Button from '../../../ui/Button'
 import {
   chatNameValidator,
   emailValidator, firstNameValidator, isValidForm, loginValidator,
   phoneValidator, secondNameValidator,
-} from '../../../controllers/validators'
-import { withUser } from '../../../core/Store'
-import { User } from '../../../api/AuthAPI'
-import UsersController from '../../../controllers/UsersController'
+} from '../../../../controllers/validators'
+import { withUser } from '../../../../core/Store'
+import { User } from '../../../../api/AuthAPI'
+import UsersController from '../../../../controllers/UsersController'
 
 interface IProfileFormProps extends User {
   events?: Record<string, (e: Event) => void>
