@@ -10,10 +10,11 @@ export enum StoreEvents {
 }
 
 interface State {
-  user: User;
-  chats: ChatInfo[];
-  messages: Record<number, IMessage[]>;
-  selectedChat?: number;
+  user: User,
+  chats: ChatInfo[],
+  messages: Record<number, IMessage[]>,
+  selectedChat?: number,
+  searchChatQuery?: string,
   profileShow: {
     editProfile: boolean,
     editProfilePassword: boolean,
@@ -88,3 +89,4 @@ export const withSelectedChatMessages = withStore((state) => {
   }
 })
 export const withShowModalAddChat = withStore((state) => ({ showModalAddChat: state.showModalAddChat }))
+export const withSearchChatQuery = withStore((state) => ({ searchChatQuery: state.searchChatQuery }))

@@ -24,7 +24,10 @@ class ChatsSidebar extends Block {
         class: 'search-input',
         placeholder: 'Поиск',
         events: {
-          keyup: (event: Event) => console.log((event.target as HTMLInputElement).value),
+          keyup: (event: Event) => {
+            const val = ((event.target as HTMLInputElement).value)
+            store.set('searchChatQuery', val)
+          },
         },
       }),
       AddChatButton: new Button({
