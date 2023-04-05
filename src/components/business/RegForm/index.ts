@@ -24,6 +24,7 @@ export default class RegForm extends Block {
         type: 'text',
         events: {
           blur: (e: Event) => emailValidator.bind(this)(e.target as HTMLInputElement),
+          focus: (e: Event) => emailValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
       LoginField: new Field({
@@ -35,6 +36,7 @@ export default class RegForm extends Block {
         type: 'text',
         events: {
           blur: (e: Event) => loginValidator.bind(this)(e.target as HTMLInputElement),
+          focus: (e: Event) => loginValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
       FirstNameField: new Field({
@@ -46,6 +48,7 @@ export default class RegForm extends Block {
         type: 'text',
         events: {
           blur: (e: Event) => firstNameValidator.bind(this)(e.target as HTMLInputElement),
+          focus: (e: Event) => firstNameValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
       SecondNameField: new Field({
@@ -57,6 +60,7 @@ export default class RegForm extends Block {
         type: 'text',
         events: {
           blur: (e: Event) => secondNameValidator.bind(this)(e.target as HTMLInputElement),
+          focus: (e: Event) => secondNameValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
       PhoneField: new Field({
@@ -68,6 +72,7 @@ export default class RegForm extends Block {
         type: 'text',
         events: {
           blur: (e: Event) => phoneValidator.bind(this)(e.target as HTMLInputElement),
+          focus: (e: Event) => phoneValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
       PasswordField: new Field({
@@ -79,6 +84,7 @@ export default class RegForm extends Block {
         type: 'password',
         events: {
           blur: (e: Event) => passwordValidator.bind(this)(e.target as HTMLInputElement),
+          focus: (e: Event) => passwordValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
       PasswordConfirmField: new Field({
@@ -90,6 +96,7 @@ export default class RegForm extends Block {
         type: 'password',
         events: {
           blur: (e: Event) => passwordConfirmValidator.bind(this)(e.target as HTMLInputElement),
+          focus: (e: Event) => passwordConfirmValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
       SubmitButton: new Button({

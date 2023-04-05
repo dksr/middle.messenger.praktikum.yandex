@@ -7,6 +7,7 @@ import { isValidForm, loginValidator, passwordValidator } from '../../../control
 import Router from '../../../utils/Router'
 import AuthController from '../../../controllers/AuthController'
 import { SigninData } from '../../../api/AuthAPI'
+import { Routes } from '../../../index'
 
 interface IAuthFormProps {
   events?: Record<string, (e: Event) => void>
@@ -24,6 +25,7 @@ export default class AuthForm extends Block<IAuthFormProps> {
         type: 'text',
         events: {
           blur: (e: Event) => loginValidator.bind(this)(e.target as HTMLInputElement),
+          focus: (e: Event) => loginValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
       PasswordField: new Field({
@@ -35,6 +37,7 @@ export default class AuthForm extends Block<IAuthFormProps> {
         type: 'password',
         events: {
           blur: (e: Event) => passwordValidator.bind(this)(e.target as HTMLInputElement),
+          focus: (e: Event) => passwordValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
       SubmitButton: new Button({
@@ -46,7 +49,7 @@ export default class AuthForm extends Block<IAuthFormProps> {
         label: 'Нет аккаунта?',
         class: 'button-register',
         events: {
-          click: () => Router.go('/sign-up'),
+          click: () => Router.go(Routes.Register),
         },
       }),
     }

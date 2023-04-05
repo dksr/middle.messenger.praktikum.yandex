@@ -23,6 +23,7 @@ export default class ProfilePasswordForm extends Block {
         placeholder: 'Введите старый пароль',
         events: {
           blur: (e: Event) => oldPasswordValidator.bind(this)(e.target as HTMLInputElement),
+          focus: (e: Event) => oldPasswordValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
       PasswordField: new FieldRow({
@@ -35,6 +36,7 @@ export default class ProfilePasswordForm extends Block {
         placeholder: 'Введите новый пароль',
         events: {
           blur: (e: Event) => passwordValidator.bind(this)(e.target as HTMLInputElement),
+          focus: (e: Event) => passwordValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
       PasswordConfirmField: new FieldRow({
@@ -48,6 +50,7 @@ export default class ProfilePasswordForm extends Block {
         placeholder: 'Повторите новый пароль',
         events: {
           blur: (e: Event) => passwordConfirmValidator.bind(this)(e.target as HTMLInputElement),
+          focus: (e: Event) => passwordConfirmValidator.bind(this)(e.target as HTMLInputElement),
         },
       }),
       SubmitButton: new Button({

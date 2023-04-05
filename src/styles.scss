@@ -119,10 +119,14 @@ body {
         top: - 10px;
         font-size: 12px;
       }
+
+      &.error ~ span{
+        display: block;
+      }
     }
 
     span {
-      display: block;
+      display: none;
       margin-top: 10px;
       margin-bottom: -6px;
       left: 0;
@@ -315,9 +319,13 @@ body {
         font-weight: 500;
         text-align: right;
         width: 50%;
+        &.error ~ div {
+          display: block;
+        }
       }
 
-      .error {
+      div.error-text {
+        display: none;
         font-size: 12px;
         font-weight: 400;
         margin-top: 4px;
