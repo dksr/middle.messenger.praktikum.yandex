@@ -1,6 +1,6 @@
 import Block from '../../../core/Block'
 import template from './chatsList.hbs'
-import { withChats } from '../../../core/Store'
+import { withChats, withSearchChatQuery } from '../../../core/Store'
 import { ChatInfo } from '../../../api/ChatsAPI'
 import Chat from '../Chat'
 import ChatsController from '../../../controllers/ChatsController'
@@ -8,14 +8,17 @@ import ChatsController from '../../../controllers/ChatsController'
 interface IChatsListProps {
   isLoaded: boolean,
   chats: ChatInfo[],
+  searchChatQuery?: string,
 }
 
 class ChatsList extends Block<IChatsListProps> {
   init() {
+    // @ts-ignore
     this.children.chats = this.createChats(this.props)
   }
 
   componentDidUpdate(_oldProps: IChatsListProps, newProps: IChatsListProps) {
+    // @ts-ignore
     this.children.chats = this.createChats(newProps)
 
     return true
@@ -23,7 +26,7 @@ class ChatsList extends Block<IChatsListProps> {
 
   private createChats(props: IChatsListProps) {
     // @ts-ignore
-    return props.chats.map((data) => new Chat({
+    let chats = props.chats.map((data) => new Chat({
       ...data,
       events: {
         click: () => {
@@ -31,10 +34,17 @@ class ChatsList extends Block<IChatsListProps> {
         },
       },
     }))
+    const query = this.props.searchChatQuery
+    if (query) {
+      // @ts-ignore
+      chats = chats.filter((chat) => chat.props.title.includes(query))
+    }
+    return chats
   }
   render() {
     return this.compile(template, { ...this.props })
   }
 }
 
-export default withChats(ChatsList)
+// @ts-ignore
+export default withSearchChatQuery(withChats(ChatsList))

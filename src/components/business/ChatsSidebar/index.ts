@@ -12,6 +12,8 @@ import store, { withShowModalAddChat } from '../../../core/Store'
 
 class ChatsSidebar extends Block {
   init() {
+    // @ts-ignore
+    // @ts-ignore
     this.children = {
       LinkProfile: new Link({
         label: 'Профиль',
@@ -38,6 +40,7 @@ class ChatsSidebar extends Block {
         },
       }),
       ModalAddChat: new ModalAddChat({}),
+      // @ts-ignore
       ChatsList: new ChatsList({
         isLoaded: false,
       }),

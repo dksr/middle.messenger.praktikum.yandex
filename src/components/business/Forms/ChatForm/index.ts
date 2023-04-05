@@ -43,7 +43,7 @@ class ChatForm extends Block {
         .getContent() as HTMLInputElement).value = ''
       messagesController.sendMessage(this.props.selectedChat.id, message)
     } else {
-      console.log('Форма не валидна')
+      console.error('Форма не валидна')
     }
   }
 
