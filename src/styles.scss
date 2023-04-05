@@ -318,6 +318,7 @@ body {
         font-weight: 500;
         text-align: right;
         width: 50%;
+
         &.error ~ div {
           display: block;
         }
@@ -409,7 +410,6 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-      background: none;
       font-size: 14px;
       transition: 0.2s;
       background: $mainColor;
@@ -468,6 +468,7 @@ body {
         display: block;
       }
     }
+
     span {
       display: none;
       margin-top: 10px;
