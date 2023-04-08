@@ -18,6 +18,10 @@ export class UsersApi extends BaseAPI {
     return this.http.put('/profile/avatar', data)
   }
 
+  searchUser(login: string): Promise<User[]> {
+    return this.http.post('/search', { login })
+  }
+
   read(id: number): Promise<User> {
     return this.http.get(`/${id}`)
   }

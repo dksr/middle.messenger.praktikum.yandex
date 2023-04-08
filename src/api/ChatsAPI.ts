@@ -10,7 +10,8 @@ export interface ChatInfo {
     user: User,
     time: string,
     content: string,
-  }
+  },
+  chat_users: string
 }
 
 export class ChatsAPI extends BaseAPI {
@@ -36,6 +37,10 @@ export class ChatsAPI extends BaseAPI {
 
   addUsers(id: number, users: number[]): Promise<unknown> {
     return this.http.put('/users', { users, chatId: id })
+  }
+
+  deleteUsers(id: number, users: number[]): Promise<unknown> {
+    return this.http.delete('/users', { users, chatId: id })
   }
 
   async getToken(id: number): Promise<string> {

@@ -9,7 +9,16 @@
           {{#if showModalChatSettings}}
             {{{ModalChatSettings}}}
           {{/if}}
+          {{#if showModalAddChatUser}}
+            {{{ModalAddChatUser}}}
+          {{/if}}
+          {{#if showModalDeleteChatUser}}
+            {{{ModalDeleteChatUser}}}
+          {{/if}}
         </div>
+      </div>
+      <div class="chat__users">
+        В чате: <span>{{selectedChat.chat_users}}</span>
       </div>
       {{{ChatMessages}}}
       <div class="chat__form">

@@ -71,6 +71,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 3;
 }
 
 .auth-content {
@@ -785,7 +786,17 @@ body {
         }
 
       }
+      &__users {
+        padding: 10px 0;
+        border-bottom: 1px solid #eaeaea;
+        font-weight: 600;
 
+        span {
+          margin-left: 10px;
+          font-weight: 400;
+          color: $greyTextColor;
+        }
+      }
       &__messages {
         display: flex;
         flex-direction: column-reverse;

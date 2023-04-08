@@ -48,6 +48,21 @@ class UsersController {
     }
   }
 
+  async searchUserByLogin(login: string) {
+    try {
+      const users = await this.api.searchUser(login)
+      const user = users.filter((user) => user.login === login)
+
+      if (user.length === 1) {
+        return user[0].id
+      }
+      console.error('Пользователь не найден')
+      return
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   makeAvatar(user: User) {
     if (user.avatar) {
       user.avatar = RESOURCES + user.avatar

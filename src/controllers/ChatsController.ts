@@ -4,6 +4,7 @@ import store from '../core/Store'
 import { formatDate } from '../utils/helpers'
 import chatImg from '../../static/chat-img.png'
 import { RESOURCES } from '../utils/HTTPTransport'
+import UsersController from './UsersController'
 
 class ChatsController {
   private readonly api: ChatsAPI
@@ -22,7 +23,7 @@ class ChatsController {
   async fetchChats() {
     const chats = await this.api.read()
 
-    chats.map(async (chat) => {
+    await Promise.all(chats.map(async (chat) => {
       if (chat.last_message && chat.last_message.time) {
         chat.last_message.time = formatDate(chat.last_message.time)
       }
@@ -31,16 +32,45 @@ class ChatsController {
       } else {
         chat.avatar = RESOURCES + chat.avatar
       }
+
+      chat.chat_users = await this.getChatUsers(chat.id)
+
       const token = await this.getToken(chat.id)
 
       await MessagesController.connect(chat.id, token)
-    })
+    }))
 
     store.set('chats', chats)
   }
 
-  addUserToChat(id: number, userId: number) {
-    this.api.addUsers(id, [userId])
+  async addUserToChat(chatId: number, login: string) {
+    const userId = await UsersController.searchUserByLogin(login)
+    if (chatId && userId) {
+      await this.api.addUsers(chatId, [userId])
+      store.set('showModalAddChatUser', false)
+      this.fetchChats()
+    } else {
+      console.error('ID пользовтеля или чата неверные')
+    }
+  }
+
+  async deleteUsersFromChat(chatId: number, login: string) {
+    const userId = await UsersController.searchUserByLogin(login)
+    if (chatId && userId) {
+      await this.api.deleteUsers(chatId, [userId])
+      store.set('showModalDeleteChatUser', false)
+      this.fetchChats()
+    } else {
+      console.error('ID пользовтеля или чата неверные')
+    }
+  }
+
+  async getChatUsers(chatId: number) {
+    const chatUsers = await this.api.getUsers(chatId)
+    const stringUsers = chatUsers
+      .map((user) => `${user.first_name} ${user.second_name} (${user.login})`)
+      .join(', ')
+    return stringUsers
   }
 
   async delete(id: number) {

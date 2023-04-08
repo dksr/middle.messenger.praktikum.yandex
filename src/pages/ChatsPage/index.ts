@@ -7,7 +7,7 @@ export default class ChatsPage extends Block {
   init() {
     this.children = {
       chatsSidebar: new ChatsSidebar({}),
-      chatsMain: new ChatsMain({ showModalChatSettings: true }),
+      chatsMain: new ChatsMain(this.props),
     }
   }
 

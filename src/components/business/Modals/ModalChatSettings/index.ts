@@ -17,9 +17,21 @@ export default class ModalChatSettings extends Block {
       }),
       AddUserLink: new Link({
         label: 'Добавить пользователя',
+        events: {
+          click: () => {
+            store.set('showModalChatSettings', false)
+            store.set('showModalAddChatUser', true)
+          },
+        },
       }),
       DeleteUserLink: new Link({
         label: 'Удалить пользователя',
+        events: {
+          click: () => {
+            store.set('showModalChatSettings', false)
+            store.set('showModalDeleteChatUser', true)
+          },
+        },
       }),
       DeleteChatLink: new Link({
         label: 'Удалить чат',
