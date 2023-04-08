@@ -3,6 +3,7 @@ import MessagesController from './MessagesController'
 import store from '../core/Store'
 import { formatDate } from '../utils/helpers'
 import chatImg from '../../static/chat-img.png'
+import { RESOURCES } from '../utils/HTTPTransport'
 
 class ChatsController {
   private readonly api: ChatsAPI
@@ -27,6 +28,8 @@ class ChatsController {
       }
       if (chat.avatar === null) {
         chat.avatar = chatImg
+      } else {
+        chat.avatar = RESOURCES + chat.avatar
       }
       const token = await this.getToken(chat.id)
 

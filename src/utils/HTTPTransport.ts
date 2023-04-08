@@ -1,3 +1,5 @@
+import { queryStringify } from './helpers'
+
 export enum Method {
   Get = 'Get',
   Post = 'Post',
@@ -11,8 +13,6 @@ type Options = {
   data?: any;
 };
 
-export const RESOURCES = 'https://ya-praktikum.tech/api/v2/resources'
-
 export default class HTTPTransport {
   static API_URL = 'https://ya-praktikum.tech/api/v2'
   protected endpoint: string
@@ -21,8 +21,12 @@ export default class HTTPTransport {
     this.endpoint = `${HTTPTransport.API_URL}${endpoint}`
   }
 
-  public get<Response>(path = '/'): Promise<Response> {
-    return this.request<Response>(this.endpoint + path)
+  public get<Response>(path = '/', options?: Options): Promise<Response> {
+    if (options?.data && typeof options.data === 'object') {
+      options.data = queryStringify(options.data)
+      path += options.data
+    }
+    return this.request<Response>(this.endpoint + path, { ...options, method: Method.Get })
   }
 
   public post<Response = void>(path: string, data?: unknown): Promise<Response> {
@@ -92,3 +96,5 @@ export default class HTTPTransport {
     })
   }
 }
+
+export const RESOURCES = `${HTTPTransport.API_URL}/resources`

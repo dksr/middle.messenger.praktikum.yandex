@@ -1,4 +1,4 @@
-import { set } from '../utils/helpers'
+import { isEqual, set } from '../utils/helpers'
 import EventBus from './EventBus'
 import Block from './Block'
 import { User } from '../api/AuthAPI'
@@ -20,7 +20,9 @@ interface State {
     editProfilePassword: boolean,
     editProfileAvatarModal: boolean
   },
+  showModalChatSettings: boolean,
   showModalAddChat: boolean,
+  showModalDeleteChat: boolean,
   showModalAddChatUser: boolean,
   showModalDeleteChatUser: boolean,
 }
@@ -55,6 +57,10 @@ export function withStore<SP extends Record<string, any>>(mapStateToProps: (stat
         store.on(StoreEvents.Updated, () => {
           const stateProps = mapStateToProps(store.getState())
 
+          if (isEqual(previousState, stateProps)) {
+            return
+          }
+
           previousState = stateProps
 
           // @ts-ignore
@@ -88,5 +94,10 @@ export const withSelectedChatMessages = withStore((state) => {
     userId: state.user.id,
   }
 })
-export const withShowModalAddChat = withStore((state) => ({ showModalAddChat: state.showModalAddChat }))
 export const withSearchChatQuery = withStore((state) => ({ searchChatQuery: state.searchChatQuery }))
+
+export const withShowModalChatSettings = withStore((state) => ({ showModalChatSettings: state.showModalChatSettings }))
+export const withShowModalAddChat = withStore((state) => ({ showModalAddChat: state.showModalAddChat }))
+export const withShowModalDeleteChat = withStore((state) => ({ showModalDeleteChat: state.showModalDeleteChat }))
+export const withShowModalAddChatUser = withStore((state) => ({ showModalAddChatUser: state.showModalAddChatUser }))
+export const withShowModalDeleteChatUser = withStore((state) => ({ showModalDeleteChatUser: state.showModalDeleteChatUser }))

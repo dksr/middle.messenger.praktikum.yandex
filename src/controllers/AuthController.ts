@@ -3,6 +3,8 @@ import router from '../utils/Router'
 import MessagesController from './MessagesController'
 import store from '../core/Store'
 import { Routes } from '../index'
+import { RESOURCES } from '../utils/HTTPTransport'
+import avatarImg from '../../static/no-avatar.png'
 
 class AuthController {
   private readonly api: AuthAPI
@@ -37,7 +39,11 @@ class AuthController {
 
   async fetchUser() {
     const user = await this.api.read()
-
+    if (user.avatar) {
+      user.avatar = RESOURCES + user.avatar
+    } else {
+      user.avatar = avatarImg
+    }
     store.set('user', user)
   }
 

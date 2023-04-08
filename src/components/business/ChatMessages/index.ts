@@ -22,7 +22,9 @@ class ChatMessages extends Block<IChatMessagesProps> {
   }
 
   private createMessages(props: IChatMessagesProps) {
-    return props.messages.map((data) => new ChatMessage({ ...data, isMine: props.userId === data.user_id, time: formatDate(data.time) }))
+    return props.messages
+      .map((data) => new ChatMessage({ ...data, isMine: props.userId === data.user_id, time: formatDate(data.time) }))
+      .reverse()
   }
 
   render() {

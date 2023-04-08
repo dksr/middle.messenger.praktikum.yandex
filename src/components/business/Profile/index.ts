@@ -1,7 +1,6 @@
 import Block from '../../../core/Block'
 import template from './profile.hbs'
 import ProfileAvatar from '../ProfileAvatar'
-import Heading from '../../ui/Heading'
 import ProfileTable from '../ProfileTable'
 import Link from '../../ui/Link'
 import ProfileForm from '../Forms/ProfileForm'
@@ -18,17 +17,7 @@ interface IProfileProps extends User {
 class Profile extends Block<IProfileProps> {
   init() {
     this.children = {
-      ProfileAvatar: new ProfileAvatar({
-        // @ts-ignore
-        editProfileAvatarModal: false,
-        events: {
-          click: this._showAvatarModal.bind(this),
-        },
-      }),
-      ProfileHeading: new Heading({
-        class: 'profile-content__title',
-        label: this.props.first_name,
-      }),
+      ProfileAvatar: new ProfileAvatar(this.props),
       ProfileTable: new ProfileTable({}),
       ProfileEditLink: new Link({
         label: 'Изменить данные',
@@ -57,13 +46,6 @@ class Profile extends Block<IProfileProps> {
       }),
       ProfileForm: new ProfileForm({}),
       ProfilePasswordForm: new ProfilePasswordForm({}),
-    }
-  }
-
-  private _showAvatarModal(event: Event) {
-    const { id } = event.target as HTMLElement
-    if (id === 'modalAvatarOpen') {
-      store.set('profileShow.editProfileAvatarModal', true)
     }
   }
 

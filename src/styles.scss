@@ -538,6 +538,7 @@ body {
     box-sizing: border-box;
     background: $sidebarBgColor;
     border-right: 1px solid $bordersColor;
+    z-index: 2;
 
     &::-webkit-scrollbar {
       width: 4px;
@@ -758,7 +759,7 @@ body {
             justify-content: center;
             right: 0;
             width: 200px;
-            height: 100px;
+            height: 120px;
             box-shadow: 0 0 6px rgb(0 0 0 / 14%);
             border-radius: 12px;
             display: flex;
@@ -771,6 +772,10 @@ body {
               padding: 10px 16px;
               font-weight: 500;
 
+              &.delete-chat {
+                color: $logoutColor;
+              }
+
               &:hover {
                 text-decoration: underline;
               }
@@ -782,13 +787,13 @@ body {
       }
 
       &__messages {
-        overflow: auto;
-        height: 100%;
         display: flex;
-        align-items: flex-end;
-        justify-content: flex-start;
-        margin-bottom: 20px;
+        flex-direction: column-reverse;
+        height: 100%;
         box-sizing: border-box;
+        padding-bottom: 20px;
+        overflow: auto;
+
 
         &::-webkit-scrollbar {
           width: 4px;
@@ -824,7 +829,7 @@ body {
           }
 
           &__text {
-            font-weight: 500px;
+            font-weight: 500;
           }
 
           &__time {

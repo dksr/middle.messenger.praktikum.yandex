@@ -1,17 +1,16 @@
 import Block from '../../../core/Block'
 import template from './chatsMain.hbs'
-import chatImg from '../../../../static/chat-img.png'
 import btnSettings from '../../../../static/btn-setting.svg'
 import Link from '../../ui/Link'
-import Tag from '../../ui/Tag'
 import ChatForm from '../Forms/ChatForm'
-import { withSelectedChat } from '../../../core/Store'
+import store, { withSelectedChat, withShowModalChatSettings } from '../../../core/Store'
 import { ChatInfo } from '../../../api/ChatsAPI'
 import ChatMessages from '../ChatMessages'
+import ModalChatSettings from '../Modals/ModalChatSettings'
 
 interface IChatsMainProps {
-  selectedChat: ChatInfo,
-  showChatModal?: boolean,
+  selectedChat?: ChatInfo,
+  showModalChatSettings?: boolean,
 }
 
 class ChatsMain extends Block<IChatsMainProps> {
@@ -21,16 +20,10 @@ class ChatsMain extends Block<IChatsMainProps> {
         label: `<img src="${btnSettings}" alt="settings button">`,
         id: 'settings-button',
         events: {
-          click: () => this.setProps({ showChatModal: true }),
+          click: () => store.set('showModalChatSettings', true),
         },
       }),
-      ChatModalOverlay: new Tag({
-        tag: 'div',
-        class: 'overlay',
-        events: {
-          click: () => this.setProps({ showChatModal: false }),
-        },
-      }),
+      ModalChatSettings: new ModalChatSettings({}),
       ChatMessages: new ChatMessages({}),
       ChatForm: new ChatForm({}),
     }
@@ -39,10 +32,10 @@ class ChatsMain extends Block<IChatsMainProps> {
   render() {
     return this.compile(template, {
       ...this.props,
-      chatImg,
       btnSettings,
     })
   }
 }
 
-export default withSelectedChat(ChatsMain)
+// @ts-ignore
+export default withSelectedChat(withShowModalChatSettings(ChatsMain))

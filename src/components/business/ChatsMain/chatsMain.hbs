@@ -2,16 +2,12 @@
   {{#if selectedChat}}
     <div class="chat">
       <div class="chat__header">
-        <img class="avatar" src="{{chatImg}}" alt="chat img">
+        <img class="avatar" src="{{selectedChat.avatar}}" alt="chat img">
         <h3 class="chat__title">{{selectedChat.title}}</h3>
         <div class="chat__settings">
           {{{LinkSettings}}}
-          {{#if showChatModal}}
-            {{{ChatModalOverlay}}}
-            <div class="modal_chat">
-              <a>Добавить пользователя</a>
-              <a>Удалить пользователя</a>
-            </div>
+          {{#if showModalChatSettings}}
+            {{{ModalChatSettings}}}
           {{/if}}
         </div>
       </div>

@@ -13,6 +13,7 @@ export default class ModalAvatar extends Block {
         events: {
           click: () => {
             store.set('profileShow.editProfileAvatarModal', false)
+            console.log('overlay')
           },
         },
       }),

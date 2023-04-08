@@ -6,15 +6,15 @@ export class UsersApi extends BaseAPI {
     super('/user')
   }
 
-  updateUser(data: Partial<User>) {
+  updateUser(data: Partial<User>): Promise<User> {
     return this.http.put('/profile', data)
   }
 
-  updateUserPassword(data: Partial<User>) {
+  updateUserPassword(data: Partial<User>): Promise<User> {
     return this.http.put('/password', data)
   }
 
-  updateUserAvatar(data: FormData) {
+  updateUserAvatar(data: FormData): Promise<User> {
     return this.http.put('/profile/avatar', data)
   }
 
