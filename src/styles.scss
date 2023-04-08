@@ -786,6 +786,7 @@ body {
         }
 
       }
+
       &__users {
         padding: 10px 0;
         border-bottom: 1px solid #eaeaea;
@@ -797,6 +798,7 @@ body {
           color: $greyTextColor;
         }
       }
+
       &__messages {
         display: flex;
         flex-direction: column-reverse;
