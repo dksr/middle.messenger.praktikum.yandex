@@ -6,21 +6,9 @@ import ChatsMain from '../../components/business/ChatsMain'
 export default class ChatsPage extends Block {
   init() {
     this.children = {
-      chatsSidebar: new ChatsSidebar({
-        showChat: this.showChat.bind(this),
-      }),
-      chatsMain: new ChatsMain({
-        showChat: false,
-        showChatModal: false,
-        notExist: 'notExist',
-      }),
+      chatsSidebar: new ChatsSidebar({}),
+      chatsMain: new ChatsMain(this.props),
     }
-  }
-
-  showChat(show: boolean) {
-    this.children.chatsMain.setProps({
-      showChat: show,
-    })
   }
 
   render() {

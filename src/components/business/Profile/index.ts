@@ -1,40 +1,30 @@
 import Block from '../../../core/Block'
 import template from './profile.hbs'
 import ProfileAvatar from '../ProfileAvatar'
-import Heading from '../../ui/Heading'
 import ProfileTable from '../ProfileTable'
 import Link from '../../ui/Link'
-import renderDOM from '../../../utils/renderDOM'
-import ProfileForm from '../ProfileForm'
-import ProfilePasswordForm from '../ProfilePasswordForm'
+import ProfileForm from '../Forms/ProfileForm'
+import ProfilePasswordForm from '../Forms/ProfilePasswordForm'
+import store, { withProfileShow, withUser } from '../../../core/Store'
+import { User } from '../../../api/AuthAPI'
+import AuthController from '../../../controllers/AuthController'
 
-interface IProfileProps {
+interface IProfileProps extends User {
   editProfile: boolean,
-  editProfilePassword: boolean
+  editProfilePassword: boolean,
 }
 
-export default class Profile extends Block<IProfileProps> {
+class Profile extends Block<IProfileProps> {
   init() {
     this.children = {
-      ProfileAvatar: new ProfileAvatar({
-        showEditAvatarModal: false,
-        events: {
-          click: this._showAvatarModal.bind(this),
-        },
-      }),
-      ProfileHeading: new Heading({
-        label: 'Иван',
-        class: 'profile-content__title',
-      }),
+      ProfileAvatar: new ProfileAvatar(this.props),
       ProfileTable: new ProfileTable({}),
       ProfileEditLink: new Link({
         label: 'Изменить данные',
         class: 'profile-content__link',
         events: {
           click: () => {
-            this.setProps({
-              editProfile: true,
-            })
+            store.set('profileShow.editProfile', true)
           },
         },
       }),
@@ -43,9 +33,7 @@ export default class Profile extends Block<IProfileProps> {
         class: 'profile-content__link',
         events: {
           click: () => {
-            this.setProps({
-              editProfilePassword: true,
-            })
+            store.set('profileShow.editProfilePassword', true)
           },
         },
       }),
@@ -53,7 +41,7 @@ export default class Profile extends Block<IProfileProps> {
         label: 'Выйти',
         class: 'profile-content__link profile-content__link_red',
         events: {
-          click: () => renderDOM('home'),
+          click: () => AuthController.logout(),
         },
       }),
       ProfileForm: new ProfileForm({}),
@@ -61,21 +49,10 @@ export default class Profile extends Block<IProfileProps> {
     }
   }
 
-  private _showAvatarModal(event: Event) {
-    const { id } = event.target as HTMLElement
-    if (id === 'modalEditAvatar') {
-      this.children.ProfileAvatar.setProps({
-        showEditAvatarModal: false,
-      })
-    }
-    if (id === 'modalAvatarOpen') {
-      this.children.ProfileAvatar.setProps({
-        showEditAvatarModal: true,
-      })
-    }
-  }
-
   render() {
     return this.compile(template, this.props)
   }
 }
+
+// @ts-ignore
+export default withProfileShow(withUser(Profile))

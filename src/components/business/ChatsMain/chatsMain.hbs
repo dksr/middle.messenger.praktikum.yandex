@@ -1,55 +1,31 @@
 <div class="chats-content__main">
-  {{#if showChat}}
+  {{#if selectedChat}}
     <div class="chat">
       <div class="chat__header">
-        <img class="avatar" src="{{chatImg}}" alt="chat img">
-        <h3 class="chat__title">Вадим</h3>
+        <img class="avatar" src="{{selectedChat.avatar}}" alt="chat img">
+        <h3 class="chat__title">{{selectedChat.title}}</h3>
         <div class="chat__settings">
           {{{LinkSettings}}}
-          {{#if showChatModal}}
-            {{{ChatModalOverlay}}}
-            <div class="modal_chat">
-              <a>Добавить пользователя</a>
-              <a>Удалить пользователя</a>
-            </div>
+          {{#if showModalChatSettings}}
+            {{{ModalChatSettings}}}
+          {{/if}}
+          {{#if showModalAddChatUser}}
+            {{{ModalAddChatUser}}}
+          {{/if}}
+          {{#if showModalDeleteChatUser}}
+            {{{ModalDeleteChatUser}}}
           {{/if}}
         </div>
       </div>
-      <div class="chat__messages">
-        <div class="chat__day-block">
-          <div class="chat__date">19 июня</div>
-          <div class="message">
-            <div class="message__text">Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в
-              какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что
-              астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на
-              поверхности
-              Луны, так как астронавты с собой забрали только кассеты с пленкой.<br><br>
-
-              Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не
-              попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.
-            </div>
-            <div class="message__time">11:56</div>
-          </div>
-          <div class="message">
-            <div class="message__text">
-              <img src="{{messageImg}}" alt="message Img">
-            </div>
-            <div class="message__time">11:56</div>
-          </div>
-          <div class="message self">
-            <div class="message__text">
-              Круто!
-            </div>
-            <div class="message__time read">12:00</div>
-          </div>
-        </div>
+      <div class="chat__users">
+        В чате: <span>{{selectedChat.chat_users}}</span>
       </div>
+      {{{ChatMessages}}}
       <div class="chat__form">
         {{{ChatForm}}}
       </div>
     </div>
-  {{/if}}
-  {{#unless showChat}}
+  {{else}}
     <p class="chats-empty">Выберите чат, чтобы отправить сообщение</p>
-  {{/unless}}
+  {{/if}}
 </div>

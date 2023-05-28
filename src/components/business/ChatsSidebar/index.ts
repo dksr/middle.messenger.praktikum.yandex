@@ -3,123 +3,58 @@ import template from './chatsSidebar.hbs'
 import Link from '../../ui/Link'
 import Input from '../../ui/Input'
 import ChatsList from '../ChatsList'
-import renderDOM from '../../../utils/renderDOM'
-import chatImg from '../../../../static/chat-img.png'
+import Router from '../../../utils/Router'
+import ChatsController from '../../../controllers/ChatsController'
+import { Routes } from '../../../index'
+import Button from '../../ui/Button'
+import ModalAddChat from '../Modals/ModalAddChat'
+import store, { withShowModalAddChat } from '../../../core/Store'
 
-export default class ChatsSidebar extends Block {
+class ChatsSidebar extends Block {
   init() {
+    // @ts-ignore
+    // @ts-ignore
     this.children = {
       LinkProfile: new Link({
         label: 'Профиль',
         class: 'profile-link',
         events: {
-          click: () => renderDOM('profile'),
+          click: () => Router.go(Routes.Profile),
         },
       }),
       InputSearch: new Input({
         class: 'search-input',
         placeholder: 'Поиск',
         events: {
-          keyup: (event: Event) => console.log((event.target as HTMLInputElement).value),
+          keyup: (event: Event) => {
+            const val = ((event.target as HTMLInputElement).value)
+            store.set('searchChatQuery', val)
+          },
         },
       }),
-      ChatsList: new ChatsList({
-        chats: [
-          {
-            title: 'Андрей',
-            text: 'Изображение',
-            dateTime: '10:49',
-            unread: 2,
-            img: chatImg,
-          },
-          {
-            title: 'Киноклуб',
-            text: '<b>Вы:</b> стикер',
-            dateTime: '12:00',
-            unread: 0,
-            img: chatImg,
-          },
-          {
-            title: 'Илья',
-            text: 'Друзья, у меня для вас особенный выпуск новостей!...',
-            dateTime: '15:12',
-            unread: 4,
-            img: chatImg,
-          },
-          {
-            title: 'Андрей',
-            text: 'Изображение',
-            dateTime: '10:49',
-            unread: 2,
-            img: chatImg,
-          },
-          {
-            title: 'Киноклуб',
-            text: '<b>Вы:</b> стикер',
-            dateTime: '12:00',
-            unread: 0,
-            img: chatImg,
-          },
-          {
-            title: 'Илья',
-            text: 'Друзья, у меня для вас особенный выпуск новостей!...',
-            dateTime: '15:12',
-            unread: 4,
-            img: chatImg,
-          },
-          {
-            title: 'Андрей',
-            text: 'Изображение',
-            dateTime: '10:49',
-            unread: 2,
-            img: chatImg,
-          },
-          {
-            title: 'Киноклуб',
-            text: '<b>Вы:</b> стикер',
-            dateTime: '12:00',
-            unread: 0,
-            img: chatImg,
-          },
-          {
-            title: 'Илья',
-            text: 'Друзья, у меня для вас особенный выпуск новостей!...',
-            dateTime: '15:12',
-            unread: 4,
-            img: chatImg,
-          },
-          {
-            title: 'Андрей',
-            text: 'Изображение',
-            dateTime: '10:49',
-            unread: 2,
-            img: chatImg,
-          },
-          {
-            title: 'Киноклуб',
-            text: '<b>Вы:</b> стикер',
-            dateTime: '12:00',
-            unread: 0,
-            img: chatImg,
-          },
-          {
-            title: 'Илья',
-            text: 'Друзья, у меня для вас особенный выпуск новостей!...',
-            dateTime: '15:12',
-            unread: 4,
-            img: chatImg,
-          },
-        ],
+      AddChatButton: new Button({
+        label: 'Добавить чат',
+        class: 'add-chat',
         events: {
-          click: () => {
-            this.props.showChat(true)
-          },
+          click: () => store.set('showModalAddChat', true),
         },
+      }),
+      ModalAddChat: new ModalAddChat({}),
+      // @ts-ignore
+      ChatsList: new ChatsList({
+        isLoaded: false,
       }),
     }
+    ChatsController.fetchChats().finally(() => {
+      (this.children.ChatsList as Block).setProps({
+        isLoaded: true,
+      })
+    })
   }
 
   render() {
-    return this.compile(template, {})
+    return this.compile(template, this.props)
   }
 }
+
+export default withShowModalAddChat(ChatsSidebar)

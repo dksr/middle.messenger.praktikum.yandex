@@ -1,0 +1,13 @@
+<li class="chats-list__item">
+  <img src="{{avatar}}" alt="avatar">
+  <div class="group-left">
+    <h3>{{title}}</h3>
+    <p>{{last_message.content}}</p>
+  </div>
+  <div class="group-right">
+    <div class="date-time">{{last_message.time}}</div>
+    {{#if unread_count}}
+      <div class="unread-count">{{unread_count}}</div>
+    {{/if}}
+  </div>
+</li>

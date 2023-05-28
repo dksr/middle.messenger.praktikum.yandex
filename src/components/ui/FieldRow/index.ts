@@ -11,6 +11,7 @@ interface IFieldRowProps {
   class?: string,
   errorText?: string,
   id?: string,
+  placeholder?: string,
   events?: Record<string, any>
 }
 

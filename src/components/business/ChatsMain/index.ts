@@ -1,35 +1,40 @@
 import Block from '../../../core/Block'
 import template from './chatsMain.hbs'
-import chatImg from '../../../../static/chat-img.png'
 import btnSettings from '../../../../static/btn-setting.svg'
-import readStatus from '../../../../static/read-status.svg'
-import messageImg from '../../../../static/message-img.jpg'
 import Link from '../../ui/Link'
-import Tag from '../../ui/Tag'
-import ChatForm from '../ChatForm'
+import ChatForm from '../Forms/ChatForm'
+import store, {
+  withSelectedChat,
+  withShowModalAddChatUser,
+  withShowModalChatSettings,
+  withShowModalDeleteChatUser,
+} from '../../../core/Store'
+import { ChatInfo } from '../../../api/ChatsAPI'
+import ChatMessages from '../ChatMessages'
+import ModalChatSettings from '../Modals/ModalChatSettings'
+import ModalAddChatUser from '../Modals/ModalAddChatUser'
+import ModalDeleteChatUser from '../Modals/ModalDeleteChatUser'
 
 interface IChatsMainProps {
-  showChatModal: boolean,
-  showChat: boolean
+  selectedChat?: ChatInfo,
+  selectedChatUsers?: string,
+  showModalChatSettings?: boolean,
 }
 
-export default class ChatsMain extends Block<IChatsMainProps> {
+class ChatsMain extends Block<IChatsMainProps> {
   init() {
     this.children = {
       LinkSettings: new Link({
         label: `<img src="${btnSettings}" alt="settings button">`,
         id: 'settings-button',
         events: {
-          click: () => this.setProps({ showChatModal: true }),
+          click: () => store.set('showModalChatSettings', true),
         },
       }),
-      ChatModalOverlay: new Tag({
-        tag: 'div',
-        class: 'overlay',
-        events: {
-          click: () => this.setProps({ showChatModal: false }),
-        },
-      }),
+      ModalChatSettings: new ModalChatSettings({}),
+      ModalAddChatUser: new ModalAddChatUser({}),
+      ModalDeleteChatUser: new ModalDeleteChatUser({}),
+      ChatMessages: new ChatMessages({}),
       ChatForm: new ChatForm({}),
     }
   }
@@ -37,10 +42,10 @@ export default class ChatsMain extends Block<IChatsMainProps> {
   render() {
     return this.compile(template, {
       ...this.props,
-      chatImg,
       btnSettings,
-      readStatus,
-      messageImg,
     })
   }
 }
+
+// @ts-ignore
+export default withShowModalAddChatUser(withShowModalDeleteChatUser(withShowModalChatSettings(withSelectedChat(ChatsMain))))

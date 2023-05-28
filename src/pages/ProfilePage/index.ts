@@ -8,6 +8,7 @@ export default class ProfilePage extends Block {
     this.children = {
       ProfileSidebar: new ProfileSidebar({}),
       Profile: new Profile({
+        // @ts-ignore
         editProfile: false,
         editProfilePassword: false,
       }),
