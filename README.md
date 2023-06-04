@@ -7,7 +7,7 @@ https://www.figma.com/file/waPMcnmLEq8yePIAN7VMxN/messenger-prototype.dkst?node-
 Билд проекта + запуск сервера localhost:3000, раздача статики из dist:
 > npm run start 
 > 
-Запуск parcel в дев режиме на localhost:1234
+Запуск webpack-dev-server в дев режиме на localhost:1234
 >npm run dev
 >
 Билд проекта в папку dist

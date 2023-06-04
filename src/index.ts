@@ -5,6 +5,7 @@ import ChatsPage from './pages/ChatsPage'
 import ErrorPage from './pages/ErrorPage'
 import ProfilePage from './pages/ProfilePage'
 import AuthController from './controllers/AuthController'
+import './styles.scss'
 
 export enum Routes {
   Home = '/',
