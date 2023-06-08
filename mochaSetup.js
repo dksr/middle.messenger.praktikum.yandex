@@ -19,3 +19,11 @@ require.extensions['.hbs'] = function (module, filename) {
 require.extensions['.scss'] = function () {
   module.exports = () => ({});
 }
+
+require.extensions['.png'] = function () {
+  module.exports = () => ({});
+}
+
+require.extensions['.svg'] = function () {
+  module.exports = () => ({});
+}

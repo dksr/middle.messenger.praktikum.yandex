@@ -14,6 +14,4 @@ describe('Link component', () => {
     // assert
     expect(link.element?.textContent).to.eq(label)
   })
-
-  it('should go to passed route on click', () => {})
 })
