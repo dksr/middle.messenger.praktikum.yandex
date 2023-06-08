@@ -2,7 +2,7 @@ export type Indexed<T = any> = {
   [key in string]: T;
 };
 
-export function merge(lhs: Indexed, rhs: Indexed): Indexed {
+function merge(lhs: Indexed, rhs: Indexed): Indexed {
   for (const p in rhs) {
     if (!rhs.hasOwnProperty(p)) {
       continue

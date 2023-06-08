@@ -28,6 +28,7 @@
     "max-classes-per-file": "off",
     "no-constructor-return": "off",
     "no-shadow": "off",
+    "no-new": "off",
     "no-prototype-builtins": "off",
     "no-continue": "off",
     "default-param-last": "off",
