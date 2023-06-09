@@ -19,6 +19,9 @@ ESLint
 Stylelint
 >npm run stylelint
 >
+Тесты
+>npm run test
+>
 ### Описание
 Реализована своя рекативная библиотека. 
 
