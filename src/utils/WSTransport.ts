@@ -1,4 +1,4 @@
-import EventBus from '../core/EventBus'
+import { EventBus } from '../core/EventBus'
 
 export enum WSTransportEvents {
   Connected = 'connected',
@@ -9,7 +9,7 @@ export enum WSTransportEvents {
 
 export default class WSTransport extends EventBus {
   private socket: WebSocket | null = null
-  private pingInterval = 0
+  private pingInterval: number = 0
 
   constructor(private url: string) {
     super()
@@ -42,6 +42,7 @@ export default class WSTransport extends EventBus {
   }
 
   private setupPing() {
+    // @ts-ignore
     this.pingInterval = setInterval(() => {
       this.send({ type: 'ping' })
     }, 5000)

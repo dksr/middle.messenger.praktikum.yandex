@@ -1,5 +1,5 @@
 import { isEqual, set } from '../utils/helpers'
-import EventBus from './EventBus'
+import { EventBus } from './EventBus'
 import Block from './Block'
 import { User } from '../api/AuthAPI'
 import { ChatInfo } from '../api/ChatsAPI'

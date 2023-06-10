@@ -1,7 +1,7 @@
 import Block from '../core/Block'
 import { Routes } from '../index'
 
-interface BlockConstructable<P extends Record<string, any> = any> {
+export interface BlockConstructable<P extends Record<string, any> = any> {
   new(props: P): Block<P>;
 }
 
